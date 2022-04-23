@@ -49,6 +49,7 @@ int main()
 
         guesses_remaining -= 1;
         num_guesses += 1;
+        std::cout << '\n';
     }
 
     return 0;
