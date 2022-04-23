@@ -20,23 +20,31 @@ int main()
                   << "Number of guesses left: " << guesses_remaining << '\n';
 
         int guess;
+        std::cout << "Your guess: ";
         std::cin >> guess;
-        std::cout << "Your guess: " << guess << '\n';
 
         if (guess == correct_num)
         {
             std::cout << "Congrats! You guessed my number in " << num_guesses << " guesses.";
             break;
         }
-        else if (guess < correct_num)
+
+        if (guesses_remaining > 1)
         {
-            std::cout << "Wrong! My number is bigger.";
-            min = guess + 1;
+            if (guess < correct_num)
+            {
+                std::cout << "Wrong! My number is bigger.\n";
+                min = guess + 1;
+            }
+            else if (guess > correct_num)
+            {
+                std::cout << "Wrong! My number is smaller.\n";
+                max = guess - 1;
+            }
         }
-        else if (guess > correct_num)
+        else
         {
-            std::cout << "Wrong! My number is smaller.";
-            max = guess - 1;
+            std::cout << "Out of guesses! My number is " << correct_num;
         }
 
         guesses_remaining -= 1;
