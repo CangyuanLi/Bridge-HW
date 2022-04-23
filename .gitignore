@@ -20,6 +20,9 @@
 **.dct
 **.log
 **.aux
+**.fdb_latexmk
+**.fls
+**.synctex.gz
 
 **.docx
 **.ppt
