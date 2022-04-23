@@ -1,0 +1,100 @@
+\documentclass[14pt]{extreport}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage[a4paper, total={7in, 10in}]{geometry}
+\usepackage{graphicx}
+\usepackage[utf8]{inputenc}
+
+\title{Homework 4}
+\author{Cangyuan Li}
+\date{\today}
+
+\newcommand{\ddfrac}[2]{\frac{\displaystyle #1}{\displaystyle #2}}
+\newcommand{\eq}[0]{\llap{\( \Leftrightarrow \) \qquad}}
+\newcommand{\answer}[0]{\medskip \textbf{Answer:} \medskip}
+\newcommand{\union}[0]{\cup}
+\newcommand{\intersect}[0]{\cap}
+\newcommand{\sumn}[0]{\( \sum\limits_{i=1}^n \)}
+\newcommand{\limn}[0]{\( \lim_{n \to \infty} \)}
+\newcommand{\limt}[0]{\( \lim_{t \to \infty} \)}
+\newcommand{\R}[0]{\mathbb{R}}
+\newcommand{\Z}[0]{\mathbb{Z}}
+
+\begin{document}
+
+\maketitle
+
+\subsection*{Question 9:}
+
+\textit{Section A: zyBooks Exercise 4.1.3; b-c}
+
+\bigskip
+
+Which of the following functions are from \( \mathbb{R} \) to \( \mathbb{R} \)? If \( f \) is a function, give its range.
+
+\begin{enumerate}
+    \item[(b)] \( f(x) = \ddfrac{1}{x^2 - 4} \)
+    
+        \answer
+
+        This is not a function from \( \R \) to \( \R \) because for \( x = 2 \) or \( x = -2 \), there is no corresponding \( y \).
+    
+    \item[(c)] \( f(x) = \sqrt{x^2} \)
+    
+        \answer
+
+        This is a function from \( \R \) to \( \R \) because the square root is undefined only for negative numbers, and \( \forall x, x^2 >= 0 \). \( f \) is a function because there is exactly one \( y \) that corresponds to an \( x \). The range is \( [0, \infty) \) since \( \forall x, f(x) >= 0 \).
+
+\end{enumerate}
+
+\textit{Section B: zyBooks Exercise 4.1.5; b, d, h, i, l}
+
+\begin{enumerate}
+    
+    \item[(b)] Let \( A = \left\{ 2, 3, 4, 5 \right\} \). \( f: A \rightarrow \Z \text{ s.t. } f(x) = x^2 \)
+    
+        \answer
+
+        \{ 4, 9, 16, 25 \}
+    
+    \item[(d)] Let \( f: \{0, 1\}^{5} \rightarrow \Z \). For \( x \in \{ 0, 1 \}^5, f(x) \) is the number of 1's that occur in \( x \).
+
+        \answer
+
+        The range is \{ 0, 1, 2, 3, 4, 5 \}. There can be at most 5 1's in a string 11111, and the lowest possible is 0 1's in a string 00000.
+
+    \item[(h)] Let \( A = \left\{ 1, 2, 3 \right\} \). \( f: A \times A \rightarrow \Z \times \Z \), where \( f(x, y) = (y, x) \)
+    
+        \answer
+
+        Step 1: \( A \times A = \left\{ (1, 1), (1, 2), (1, 3), (2, 1), (2, 2), (2, 3), (3, 1), (3, 2), (3, 3) \right\} \)
+
+        \medskip
+
+        Step 2: Since \( A = A \), \( (x, y) = (y, x) \), so the range is the set in Step 1.
+
+    \item[(i)] Let \( A = \left\{ 1, 2, 3 \right\} \). \( f: A \times A \rightarrow \Z \times \Z \), where \( f(x, y) = (x, y + 1) \)
+    
+        \answer
+
+        From (h) we have \( A \times A = \left\{ (1, 1), (1, 2), (1, 3), (2, 1), (2, 2), (2, 3), (3, 1), (3, 2), (3, 3) \right\} \). Then the range is:
+        \[
+            \left\{ (1, 2), (1, 3), (1, 4), (2, 2), (2, 3), (2, 4), (3, 2), (3, 3), (3, 4) \right\}
+        \]
+
+    \item[(l)] Let \( A = \left\{ 1, 2, 3 \right\} \). \( f: \mathcal{P}(A) \rightarrow \mathcal{P}(A) \). For \( X \subseteq A, f(X) = X - \{1\} \)
+    
+        \answer
+
+        Step 1: \( \mathcal{P}(A) = \left\{ \varnothing, \{ 1 \}, \{ 2 \}, \{ 3 \}, \{ 1, 2 \}, \{ 1, 3 \}, \{ 2, 3 \}, \{ 1, 2, 3 \} \right\} \)
+
+        \medskip
+
+        Step 2: All elements of the powerset are by definition subsets of \( A \), so the range is:
+        \[
+            \left\{ \varnothing, \{ 2 \}, \{ 3 \}, \{ 2, 3 \} \right\} 
+        \]
+        
+\end{enumerate}
+
+\end{document}
