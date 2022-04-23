@@ -1,0 +1,544 @@
+\documentclass[14pt]{extreport}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{etoolbox}
+\usepackage[a4paper, total={7in, 10in}]{geometry}
+\usepackage{graphicx}
+\usepackage[utf8]{inputenc}
+
+\AtBeginEnvironment{align}{\setcounter{equation}{0}}
+
+\title{Homework 2}
+\author{Cangyuan Li}
+\date{\today}
+
+\newcommand{\ddfrac}[2]{\frac{\displaystyle #1}{\displaystyle #2}}
+\newcommand{\eq}[0]{\llap{\( \Leftrightarrow \) \qquad}}
+\newcommand{\answer}[0]{\medskip \textbf{Answer:} \medskip}
+\newcommand{\union}[0]{\cup}
+\newcommand{\intersect}[0]{\cap}
+\newcommand{\sumn}[0]{\( \sum\limits_{i=1}^n \)}
+\newcommand{\limn}[0]{\( \lim_{n \to \infty} \)}
+\newcommand{\limt}[0]{\( \lim_{t \to \infty} \)}
+
+\begin{document}
+
+\maketitle
+
+\subsection*{Question 5:}
+
+\subsubsection*{A:}
+
+\begin{enumerate}
+    
+    \item zyBooks Exercise 1.12.2; b, e
+    
+        \begin{enumerate}
+            
+            \item[(b)]
+            \begin{tabular}{l}
+                \( p \implies (q \land r) \) \\
+                \( \neg q \) \\
+                \hline
+                \( \therefore \neg p \)
+            \end{tabular}
+            
+                \answer
+
+                \begin{align}
+                    & \neg q; \text{ Hypothesis} \\
+                    & \neg q \lor \neg r; \text{ Addition 1} \\
+                    & \neg (q \land r); \text{ De Morgan's Laws 2} \\
+                    & p \implies (q \land r); \text{ Hypothesis} \\
+                    & \neg p; \text{ Modus tollens 3, 4}
+                \end{align}
+
+            \item[(e)]
+            \begin{tabular}{l}
+                \( p \lor q \) \\
+                \( \neg p \lor r \) \\
+                \( \neg q \) \\
+                \hline
+                \( \therefore r \)
+            \end{tabular}
+
+                \answer
+
+                \begin{align}
+                    &p \lor q; \text{Hypothesis} \\
+                    &\neg p \lor r; \text{Hypothesis} \\
+                    &q \lor r; \text{Resolution 1, 2} \\
+                    &\neg q; \text{Hypothesis} \\
+                    &r; \text{Disjunctive syollogism 3, 4}
+                \end{align}
+
+        \end{enumerate}
+
+    \item zyBooks Exercise 1.12.3; c
+    
+        \begin{enumerate}
+            
+            \item[(c)] Prove that Disjunctive syllogism is valid using the laws of propositional logic and any of the other rules of inference besides Disjunctive syllogism. (Hint: you will need one of the conditional identities from the laws of propositional logic).
+            
+                \answer
+
+                \begin{align}
+                    & p \lor q; \text{ Hypothesis} \\
+                    & \neg p \implies q; \text{ Conditional identities 1} \\
+                    & \neg p; \text {Hypothesis} \\
+                    & q; \text{ Modus ponens 2, 3}
+                \end{align}
+
+        \end{enumerate}
+
+    \item zyBooks Exercise 1.12.5; c-d
+
+    Give the form of each argument. Then prove whether the argument is valid or invalid. For valid arguments, use the rules of inference to prove validity.
+    
+    Let:
+    \begin{itemize}
+        \item \( c \): I will buy a new car
+        \item \( h \): I will buy a new house
+        \item \( j \): I will get a job
+    \end{itemize}
+
+        \begin{enumerate}
+            
+            \item[(c)] 
+            \begin{tabular}{l}
+                I will buy a new car and a new house only if I get a job. \\
+                I am not going to get a job. \\
+                \hline
+                \( \therefore \) I will not buy a new car. 
+            \end{tabular} 
+            
+                \answer
+
+                Step 1: The form of the argument is:
+                \begin{tabular}{l}
+                    \( (c \land h) \implies j \) \\
+                    \( \neg j \) \\
+                    \hline
+                    \( \therefore \neg c \)
+                \end{tabular}
+
+                or equivalently
+
+                \( (((c \land h) \implies j) \land \neg j) \implies \neg c \) is a tautology.
+
+                \medskip
+
+                Step 2: This is invalid, because there is at least one counterexample to \( (((c \land h) \implies j) \land \neg j) \implies \neg c \) is a tautology. \( \neg c \) is False when \( c \) is True. Given this, find \( h, j \) such that \( ((T \land h) \implies j) \land \neg j \) is True, so that the argument is \( T \implies F \), which is False. Set \( h \) to False and \( j \) to False. So one counterexample is \( c \equiv T, h \equiv F, j \equiv F \).
+
+            \item[(d)]
+            \begin{tabular}{l}
+                I will buy a new car and a new house only if I get a job. \\
+                I am not going to get a job. \\
+                I will buy a new house. \\
+                \hline
+                \( \therefore \) I will not buy a new car
+            \end{tabular}
+           
+                \answer
+
+                Step 1: The form of the arugment is
+                \begin{tabular}{l}
+                    \( (c \land h) \implies j \) \\
+                    \( \neg j \) \\
+                    \( h \) \\
+                    \hline
+                    \( \therefore \neg c \)
+                \end{tabular}
+
+                or equivalently \( (((c \land h) \implies j) \land \neg j \land h) \implies \neg c \) is a tautology.
+            
+                Step 2: This is invalid, because there is at least one counterexample to \( (((c \land h) \implies j) \land \neg j \land h) \implies \neg c \) is a tautology. The argument would be False if for some \( j, c, h \), the argument evaluated to \( T \implies F \). We know that the choice of \( c \) must be True, so that \( \neg c \equiv F \). Also, \( j \) must be False so that \( \neg j \equiv T \), otherwise that left-hand side would evaluate to False. Similarly, \( h \) must be True. So \( j \equiv F, c \equiv T, h \equiv T \) is a counterexample.
+            
+        \end{enumerate}
+
+\end{enumerate}
+
+\subsubsection*{B:}
+
+\begin{enumerate}
+    
+    \item zyBooks Exercise 1.13.3; b
+    
+        \begin{enumerate}
+            
+            \item[(b)]
+            \begin{tabular}{l}
+                \( \exists x (P(x) \lor Q(x)) \) \\
+                \( \exists x \neg Q(x) \) \\
+                \hline
+                \( \therefore \exists x P(x) \)
+            \end{tabular}
+
+                \answer
+
+                Let \( P(a) \equiv F \), \( P(b) \equiv F \), \( Q(a) \equiv T \), and \( Q(b) \equiv F \). Then the statement \( \exists x (P(x) \lor Q(x)) \) is satisfied by \( a \), and the statement \( \exists \neg Q(x) \) is satisfied by \( b \). But although these two statements are both satisfied, there is no choice of \( x \) that satisfies \( \exists x P(x) \), since \( P(a) \equiv P(b) \equiv F \). Therefore the argument is invalid.
+
+        \end{enumerate}
+
+    \item zyBooks Exercise 1.13.5; d-e
+
+    Prove whether each argument is valid or invalid. First find the form of the argument by defining predicates and expressing the hypotheses and the conclusion using the predicates. If the argument is valid, then use the rules of inference to prove that the form is valid. If the argument is invalid, give values for the predicates you defined for a small domain that demonstrate the argument is invalid. The domain for each problem is the set of students in a class.
+
+        \begin{enumerate}
+            
+            \item[(d)] 
+            \begin{tabular}{l}
+                Every student who missed class got a detention. \\
+                Penelope is a student in the class. \\
+                Penelope did not miss class. \\
+                \hline
+                Penelope did not get a detention.
+            \end{tabular}
+            
+                \answer
+
+                Step 1: Let
+                \begin{itemize}
+                    \item \( D(x) \): \( x \) got dentention
+                    \item \( M(x) \): \( x \) missed class
+                \end{itemize}
+                
+                Then the argument is
+                \begin{tabular}{l}
+                    \( \forall x \; M(x) \implies D(x) \) \\
+                    Penelope, a student in the class \\
+                    \( \neg M(\text{Penelope}) \) \\
+                    \hline
+                    \( \therefore \neg D(\text{Penelope}) \) 
+                \end{tabular}
+
+                \medskip
+
+                Step 2: This is invalid because it is possible to be present for class and still get a detention. Let \( P \) represent Penelope for ease of typing. Since \( P \) is in the domain (Penelope is a student in the class), let \( M(P) \equiv F \) and \( D(P) \equiv T \). Then \( M(P) \implies D(P) \equiv T \), which satsifies the condition that for every student, if the student missed the class, they received detention. The condition that Penelope did not miss the class is also satisfied since \( \neg M(P) \equiv \neg F \equiv T \). Even though both these conditions are true, the conclusion \( \neg D(P) \equiv \neg T \equiv F \), so this argument is invalid.
+            
+            \item[(e)]
+            \begin{tabular}{l}
+                Every student who missed class or got a detention did not get an A. \\
+                Penelope is a student in the class. \\
+                Penelope got an A. \\
+                \hline
+                Penelope did not get a detention.
+            \end{tabular}
+
+                \answer
+
+                Step 1: Let
+                \begin{itemize}
+                    \item \( A(x) \): \( x \) got an A
+                    \item \( D(x) \): \( x \) got a detention
+                    \item \( M(x) \): \( x \) missed class
+                    \item \( P \): Penelope
+                \end{itemize}
+
+                Then the argument is
+                \begin{tabular}{l}
+                    \( \forall x \; (M(x) \lor D(x)) \implies \neg A(x) \) \\
+                    Penelope, a student in the class \\
+                    \( A(P) \) \\
+                    \hline
+                    \( \therefore \neg D(P) \)
+                \end{tabular}
+
+                \medskip
+
+                Step 2:
+                \begin{align}
+                    & \forall x \; (M(x) \lor D(x)) \implies \neg A(x); \text{ Hypothesis} \\
+                    & \text{Penelope, a student in the class}; \text{ Hypothesis} \\
+                    & M(P) \lor D(P) \implies \neg A(P); \text{ Universal instantiation 1, 2} \\
+                    & A(P); \text{ Hypothesis} \\
+                    & \neg (M(P) \lor D(P)); \text{ Modus tollens 3, 4} \\
+                    & \neg M(P) \land \neg D(P); \text{ De Morgan's Laws 5} \\
+                    & \neg D(P) \land \neg M(P); \text{ Commutative Law 6} \\
+                    & \neg D(P); \text{ Simplification 7}
+                \end{align}
+           
+        \end{enumerate}
+
+\end{enumerate}
+\newpage
+
+\subsection*{Question 6:}
+
+\begin{enumerate}
+    
+    \item zyBooks Exercise 2.4.1; d
+    
+    Each statement below involves odd and even integers. An odd integer is an integer that can be expressed as \( 2k + 1 \), where \( k \) is an integer. An even integer is an integer that can be expressed as \( 2k \), where \( k \) is an integer. Prove each of the following statements using a direct proof.
+    
+        \begin{enumerate}
+            
+            \item[(d)] The product of two odd integers is an odd integer.
+            
+                \answer
+
+                Theorem: If \( x \) is an odd integer and \( y \) is an odd integer, then \( xy \) is an odd integer.
+
+                \medskip
+
+                Proof:
+
+                Step 1: Let \( x \) be an odd integer and \( y \) an odd integer. Then \( x \) can be expressed as \( 2a + 1 \), where \( a \) is an integer, and likewise for \( y = 2b + 1 \).
+
+                \medskip
+
+                Step 2: Plug these values into \( xy \)
+                \begin{align*}
+                    xy &= (2a + 1)(2b + 1) \\
+                       &= 2a2b + 2a + 2b + 1(1) \\
+                       &= 2(2ab + a + b) + 1
+                \end{align*}
+
+                \medskip
+
+                Step 3: Since \( a, b \) are integers, \( 2ab \) is also an integer, and the sum of three integer values is also an integer. Let \( k := 2ab + a + b \), where \( k \) is an integer.
+                \begin{align*}
+                    xy &= 2k + 1
+                \end{align*}
+
+                In this form we can see that \( xy \) is an odd integer.
+            
+        \end{enumerate}
+
+    \item zyBooks Exercise 2.4.3; b
+    
+    Prove each of the following statements using a direct proof.
+    
+        \begin{enumerate}
+            
+            \item[(b)] If \( x \) is a real number and \( x \leq 3 \), then \( 12 - 7x + x^2 \geq 0 \).
+            
+                \answer
+
+                Proof:
+
+                Step 1: Re-write and factor \( 12 - 7x + x^2 \) and \( x \leq 3 \)
+                \begin{align*}
+                    12 - 7x + x^2 &= x^2 - 7x + 12 \\
+                                  &= (x - 3)(x -4) \\
+                \end{align*}
+                \begin{align*}
+                    & x \leq 3 \\
+                    &\eq x - 3 \leq 0 \\
+                \end{align*}
+
+                So \( (x - 3)(x - 4) \geq 0 \), and \( x - 3 \leq 0 \)
+
+                \medskip
+
+                Step 2: Because \( x \leq 3 \), \( x - 4 \) must be a negative number, and \( x - 3 \) is either a negative number or 0. Therefore, the product of \( (x - 3)(x - 4) \) will always either be 0 (if \( x = 3 \), since \( 0 \times (-) = 0 \)) or a positive number (when \( x < 3\), since \( (-)(-) = + \)).
+
+                \medskip 
+
+                Since both cases hold, \( \blacksquare \)
+        \end{enumerate}
+
+\end{enumerate}
+\newpage
+
+\subsection*{Question 7:}
+
+\begin{enumerate}
+    
+    \item zyBooks Exercise 2.5.1; d
+    
+        \begin{enumerate}
+            
+            \item[(d)] For every integer \( n \), if \( n^2 - 2n + 7 \) is even, then \( n \) is odd. 
+            
+                \answer
+
+                Step 1: Expressed another way, \( \forall n \; A(n) \implies B(n) \). So the contrapositive is \( \forall n \; \neg B(n) \implies \neg A(n) \), or ``For every integer \( n \), if \( n \) is even, then \( n^2 - 2n + 7 \) is odd''.
+
+                \medskip
+
+                Step 2: If \( n \) is even, then \( n = 2k \), where \( k \) is an integer. Then,
+                \begin{align*}
+                    n^2 - 2n + 7 &= (2k)^2 - 2(2k) + 7 \\
+                                 &= 4k^2 - 4k + 7 \\
+                                 &= 2(2k^2 - 2k) + 6 + 1 \\
+                                 &= [2(2k^2 - 2k) + 6] + 1 \\
+                                 &= 2[(2k^2 - 2k) + 3] + 1
+                \end{align*}
+
+                Step 3: Since \( k \) is an integer, \( 2k^2 \) is an integer and \( 2k \) is an integer. Then \( m := (2k^2 - 2k) + 3 \), where \( m \) is an integer.
+                \begin{align*}
+                    n^2 - 2n + 7 &= 2m + 1
+                \end{align*}
+
+                So \( n^2 - 2n + 7 \) is odd when \( n \) is even. Since we have proved the contrapositive, we have proved the original statement ``For every integer \( n \), if \( n^2 - 2n + 7 \) is even, then \( n \) is odd'', \( \blacksquare \).
+        \end{enumerate}
+    
+    \item zyBooks Exercise 2.5.4; a, b
+    
+    Prove each statement by contrapositive
+    
+        \begin{enumerate}
+
+            \item[(a)] For every pair of real numbers \( x \) and \( y \), if \( x^3 + xy^2 \leq x^2y + y^3 \), then \( x \leq y \).
+            
+                \answer
+
+                Step 1: The contrapositive is ``For every pair of real numbers \( x \) and \( y \), if \( x > y \), then \( x^3 + xy^2 > x^2y + y^3 \)''.
+
+                \medskip
+
+                Step 2: We can rewrite
+                \begin{align*}
+                    & x^3 + xy^2 > x^2y + y^3 \\
+                    &\eq x(x^2 + y^2) > y(x^2 + y^2)
+                \end{align*}
+
+                Step 3: We cannot divide yet even though we know the sign won't flip since \( x^2 + y^2 \geq 0 \), since you cannot divide by 0. But since \( x > y \), \( x^2 + y^2 > 0 \), since \( x^2 + y^2 = 0 \) if and only if \( x = 0, y = 0 \), and \( a \neq 0 \implies a^2 > 0 \). So, divide both sides 
+                \begin{align*}
+                    & x^3 + xy^2 > x^2y + y^3 \\
+                    & \eq x(x^2 + y^2) > y(x^2 + y^2) \\
+                    & \eq x > y
+                \end{align*}
+
+                Therefore, the contrapositive is proved and the original statement is also proved, \( \blacksquare \)
+
+            \item[(b)] For every pair of real numbers \( x \) and \( y \), if \( x + y > 20 \), then \( x > 10 \) or \( y > 10 \).
+            
+                \answer
+
+                Step 1: Applying De Morgan's Law to the latter statement, the contrapositive is ``For every pair of real numbers \( x \) and \( y \), if \( x \leq 10 \land y \leq 10 \), then \( x + y \leq 20 \)''.
+
+                \medskip
+
+                Step 2: Since \( x \leq 10 \) and \( y \leq 10 \) have the same sign and direction, they can be added together. So
+                \begin{align*}
+                    & x + y \leq 10 + 10 \\
+                    &\eq x + y \leq 20
+                \end{align*}
+
+                Therefore, the contrapositive is porved and so is the original statement, \( \blacksquare \).
+        \end{enumerate}
+
+    \item zyBooks Exercise 2.5.5; c
+    
+    Prove each statement using a direct proof or proof by contrapositive.
+    
+        \begin{enumerate}
+            
+            \item[(c)] For every non-zero real number \( x \), if \( x \) is irrational, then \( \frac{1}{x} \) is also irrational.
+            
+                \answer
+
+                Step 1: The contrapositive is that ``for every non-zero real number \( x \), if \( \frac{1}{x} \) is rational, then \( x \) is rational.''
+
+                \medskip
+
+                Step 2: If \( \frac{1}{x} \) is rational, then it can be expressed as a ratio of two integers \( \frac{a}{b} \).
+                \begin{align*}
+                    & \frac{1}{x} = \frac{a}{b} \\
+                    &\eq 1 = x \frac{a}{b} \\
+                    &\eq x = \frac{b}{a}
+                \end{align*}
+
+                Since \( a \) and \( b \) are integers, the ratio of \( b/a \) is by definition a rational number. The contrapositive is proved, and therefore the original statement is as well, \( \blacksquare \).
+        \end{enumerate}
+
+\end{enumerate}
+\newpage
+
+\subsection*{Question 8:}
+
+zyBooks Exercise 2.6.6; c-d
+
+
+Proofs by contradiction. Give a proof for each statement.
+
+\begin{enumerate}
+
+    \item[(c)] The average of three real numbers is greater than or equal to at least one of the numbers.
+    
+        \answer
+
+        Step 1: We suppose the negation. Suppose that the average of three real numbers is not greater than or equal to all the three numbers. Expressed differently, \( \frac{a + b + c}{3} < a \land \frac{a + b + c}{3} < b \land \frac{a + b + c}{3} < c \).
+
+        \medskip
+
+        Step 2: Since the sign and direction of the equalities are the same, we may add them together
+        \begin{align*}
+            & \frac{a + b + c}{3} < a + \frac{a + b + c}{3} < b + \frac{a + b + c}{3} < c \\
+            &\eq \frac{a + b + c}{3} + \frac{a + b + c}{3} + \frac{a + b + c}{3} < a + b + c \\
+            &\eq 3 \left( \frac{a + b + c}{3} \right) < a + b + c \\
+            &\eq a + b + c < a + b + c
+        \end{align*}
+
+        The resulting expression is a contradiction. Therefore, the average of three real numbers must be greater than or equal to at least one of the numbers, \( \blacksquare \).
+
+    \item[(d)] There is no smallest integer.
+    
+    \answer
+
+    Step 1: We suppose the negation. Suppose that there exists a smallest integer \( x \).
+
+    \medskip 
+
+    Step 2: If \( x \) is an integer, then \( x - 1 \) is an integer, and \( x - 1 < x \). This is a contradiction, so there is no smallest integer, \( \blacksquare \).
+
+\end{enumerate}
+\newpage
+
+\subsection*{Question 9:}
+
+zyBooks Exercise 2.7.2; b
+
+
+If integers \( x \) and \( y \) have the same parity, then \( x + y \) is even. The parity of a number tells whether the number is odd or even. If \( x \) and \( y \) have the same parity, they are either both even or both odd.
+
+\answer
+
+There are two cases, \( x, y \) are both even, or \( x, y \) are both odd.
+
+\medskip
+
+Case 1: \( x, y \) are odd
+
+Since \( x, y \) are odd integers, they can be expressed as \( x = 2a + 1 \) and \( y = 2b + 1 \), where \( a, b \) are integers. Then,
+
+\begin{align*}
+    x + y &= (2a + 1) + (2b + 1) \\
+          &= 2a + 2b + 2 \\
+          &= 2(a + b + 1)
+\end{align*}
+
+Since \( a, b \) (and 1 ) are integers, their sum is also an integer. Let \( k := a + b + 1 \). Then,
+
+\begin{align*}
+    x + y &= 2k
+\end{align*}
+
+So \( x + y \) is even.
+
+\medskip
+
+Case 2: \( x, y \) are even
+
+Since \( x, y \) are even integers, they can be expressed as \( x = 2a \) and \( y = 2b \), where \( a, b \) are integers. Then,
+
+\begin{align*}
+    x + y &= 2a + 2b \\
+          &= 2(a + b)
+\end{align*}
+
+Since \( a, b \) are integers, their sum is also an integer. Let \( k := a + b \). Then,
+
+\begin{align*}
+    x + y &= 2k
+\end{align*}
+
+So \( x + y \) is even.
+
+\bigskip
+
+Since both cases result in \( x + y \) being even, \( \blacksquare \)
+
+\end{document}

@@ -1,0 +1,1369 @@
+\documentclass[12pt]{extreport}
+\usepackage{amsmath}
+\usepackage{enumitem}
+\usepackage[a4paper, total={7in, 10in}]{geometry}
+\usepackage{graphicx}
+\usepackage[utf8]{inputenc}
+
+\title{Homework 1}
+\author{Cangyuan Li}
+\date{\today}
+
+\newcommand{\ddfrac}[2]{\frac{\displaystyle #1}{\displaystyle #2}}
+\newcommand{\eq}[0]{\llap{\( \Leftrightarrow \) \qquad}}
+\newcommand{\answer}[0]{\medskip \textbf{Answer:} \medskip}
+\newcommand{\union}[0]{\cup}
+\newcommand{\intersect}[0]{\cap}
+\newcommand{\xor}[0]{\oplus}
+\newcommand{\sumn}[0]{\( \sum\limits_{i=1}^n \)}
+\newcommand{\limn}[0]{\( \lim_{n \to \infty} \)}
+\newcommand{\limt}[0]{\( \lim_{t \to \infty} \)}
+
+\begin{document}
+
+\maketitle
+
+\subsection*{Question 1:}
+
+\subsubsection{A. Convert the following numbers to their decimal representation.}
+
+For these questions, I use the expansion \( (a_{n} \dots a_{1}a_{0})_{b} = a_{0}b^{0} + a_{1}b^{1} + \dots + a_{n}b^{n} \)
+
+\begin{enumerate}
+
+    \item \( 10011011_{2} \)
+    
+        \answer
+        \begin{align*}
+            10011011_{2} &= 1(2^{0}) + 1(2^{1}) + 0(2^{2}) + 1(2^{3}) + 1(2^{4}) + 0(2^{5}) + 0(2^{6}) + 1(2^{7}) \\
+                        &= 1 + 2 + 8 + 16 + 128 \\
+                        &= 155_{10}
+        \end{align*}
+
+    \item \( 456_{7} \)
+    
+        \answer
+        \begin{align*}
+            456_{7} &= 6(7^{0}) + 5(7^{1}) + 4(7^{2}) \\
+                    &= 6 + 35 + 196 \\
+                    &= 237_{10}
+        \end{align*}
+
+    \item \( 38A_{16} \)
+    
+        \answer
+        \begin{align*}
+            38A_{16} &= 10(16^{0}) + 8(16^{1}) + 3(16^{2}) \\
+                              &= 10 + 128 + 768 \\
+                              &= 906_{10}
+        \end{align*}
+
+    \item \( 2214_{5} \)
+    
+        \answer
+        \begin{align*}
+            2214_{5} &= 4(5^{0}) + 1(5^{1}) + 2(5^{2}) + 2(5^{3}) \\
+                     &= 4 + 5 + 50 + 250 \\
+                     &= 309_{10}
+        \end{align*}
+
+\end{enumerate}
+
+\subsubsection{B. Convert the following numbers to their binary representation.}
+
+For these questions I use the remainder trick to convert from decimal to binary, where the decimal number is divided by the base I am converting to (in this case 2), the remainder is stored in an array to be read from right to left to construct the final binary number, and the quotient is used to repeat the algorithm until the quotient is 0.
+
+\begin{enumerate}
+    
+    \item \( 69_{10} \)
+    
+        \answer
+        \begin{itemize}
+            \item Iteration 1: \( 69 / 2 = 34, \text{remainder } 1 \)
+            \item Iteration 2: \( 34 / 2 = 17, \text{remainder } 0 \)
+            \item Iteration 3: \( 17 / 2 = 8, \text{remainder } 1 \)
+            \item Iteration 4: \( 8 / 2 = 4, \text{remainder } 0 \)
+            \item Iteration 5: \( 4 / 2 = 2, \text{remainder } 0 \)
+            \item Iteration 6: \( 2 / 2 = 1, \text{remainder } 0 \)
+            \item Iteration 7: \( 1 / 2 = 0, \text{remainder } 1 \)
+        \end{itemize}
+
+        Therefore, \( 69_{10} = 1000101_{2} \)
+
+    \item \( 485_{10} \)
+    
+        \answer
+        \begin{itemize}
+            \item Iteration 1: \( 485 / 2 = 242, \text{remainder } 1 \)
+            \item Iteration 2: \( 242 / 2 = 121, \text{remainder } 0 \)
+            \item Iteration 3: \( 121 / 2 = 60, \text{remainder } 1 \)
+            \item Iteration 4: \( 60 / 2 = 30, \text{remainder } 0 \)
+            \item Iteration 5: \( 30 / 2 = 15, \text{remainder } 0 \)
+            \item Iteration 6: \( 15 / 2 = 7, \text{remainder } 1 \)
+            \item Iteration 7: \( 7 / 2 = 3, \text{remainder } 1 \)
+            \item Iteration 8: \( 3 / 2 = 1, \text{remainder } 1 \)
+            \item Iteration 9: \( 1 / 2 = 0, \text{remainder } 1 \)
+        \end{itemize}
+
+        Therefore, \( 485_{10} = 111100101_{2} \)
+
+    \item \( 6D1A_{16} \)
+    
+        \answer
+        Step 1: Convert number to decimal
+
+        \begin{align*}
+            6D1A_{16} &= 10(16^{0}) + 1(16^{1}) + 13(16^{2}) + 6(16^{3}) \\
+                      &= 10 + 16 + 3,328 + 24,576 \\
+                      &= 27,930_{10}
+        \end{align*}
+
+        Step 2: Apply remainder algorithm
+
+        \begin{itemize}
+            \item Iteration 1: \( 27,930 / 2 = 13,965, \text{remainder } 0 \)
+            \item Iteration 2: \( 13,965 / 2 = 6,982, \text{remainder } 1 \)
+            \item Iteration 3: \( 6,982 / 2 = 3,491, \text{remainder } 0 \)
+            \item Iteration 4: \( 3,491 / 2 = 1,745, \text{remainder } 1 \)
+            \item Iteration 5: \( 1,745 / 2 = 872, \text{remainder } 1 \)
+            \item Iteration 6: \( 872 / 2 = 436, \text{remainder } 0 \)
+            \item Iteration 7: \( 436 / 2 = 218, \text{remainder } 0 \)
+            \item Iteration 8: \( 218 / 2 = 109, \text{remainder } 0 \)
+            \item Iteration 9: \( 109 / 2 = 54, \text{remainder } 1 \)
+            \item Iteration 10: \( 54 / 2 = 27, \text{remainder } 0 \)
+            \item Iteration 11: \( 27 / 2 = 13, \text{remainder } 1 \)
+            \item Iteration 12: \( 13 / 2 = 6, \text{remainder } 1 \)
+            \item Iteration 13: \( 6 / 2 = 3, \text{remainder } 0 \)
+            \item Iteration 14: \( 3 / 2 = 1, \text{remainder } 1 \)
+            \item Iteration 15: \( 1 / 2 = 0, \text{remainder } 1 \)        
+        \end{itemize}
+
+        Therefore, \( 6D1A_{16} = 110110100011010_{2} \)
+
+\end{enumerate}
+
+\subsection*{C. Convert the following numbers to their hexadecimal representation.}
+
+\begin{enumerate}
+    
+    \item \( 1101011_{2} \)
+    
+        \answer
+
+        Binary can be converted to hexadecimal by using the conversion table for the first sixteen hexadecimal numbers. The binary number can be split up into groups of four digits, starting from the rightmost digit. So \( 1101011_{2} \) is split up into \( 0110_{2} \) and \( 1011_{2} \). These correspond to \( 6_{16} \) and \( B_{16} \) respectively. Concatenating the two together gives the hexadecimal representation, \( 6B \).
+
+    \item \( 895_{10} \)
+    
+        \answer
+        \begin{itemize}
+            \item Iteration 1: \( 895 / 16 = 55, \text{remainder } F \)
+            \item Iteration 2: \( 55 / 16 = 3, \text{remainder } 7 \)
+            \item Iteration 3: \( 3 / 16 = 0, \text{remainder } 3 \)
+        \end{itemize}
+
+        Therefore, \( 895_{10} = 37F_{16} \)
+
+\end{enumerate}
+\newpage
+
+\subsection*{Question 2:}
+
+For these questions, I use that the ``remainder'' of \( x_{b} + y_{b} \) is \( x + y - b \), where \( b \) is the base. For example, for a base of 8, and \( x, y = 2, 7 \), the ``remainder'' is \( 2 + 7 - 8 = 1 \), and the carry over is \( 1 \).
+
+\begin{enumerate}
+    
+    \item \( 7566_{8} + 4515_{8} \)
+    
+        \answer
+
+        \begin{tabular}{cccccc}
+            Carry Over & 1& 1& 1& 1& 0 \\
+            \\
+                       & 0& 7& 5& 6& 6 \\
+            +          & 0& 4& 5& 1& 5 \\
+            \hline
+                       & 1& 4& 3& 0& 3
+        \end{tabular}
+
+    \item \( 10110011_{2} + 1101_{2} \)
+    
+        \answer
+
+        \begin{tabular}{ccccccccc}
+            Carry Over &0& 1& 1& 1& 1& 1& 1& 0 \\
+            \\
+            & 1& 0& 1& 1& 0& 0& 1& 1 \\
+            + & 0& 0& 0& 0& 1& 1& 0& 1 \\
+            \hline
+            & 1& 1& 0& 0& 0& 0& 0& 0
+        \end{tabular}
+
+    \item \( 7A66_{16} + 45C5_{16} \)
+    
+        \answer
+
+        \( A = 10, B = 11, C = 12 \)
+
+        \begin{tabular}{ccccc}
+            Carry Over &1& 1& 0& 0 \\
+            \\
+            & 7& A& 6& 6 \\
+            + & 4& 5& C& 5 \\
+            \hline
+            & C& 0& 2& B
+        \end{tabular}
+
+    \item \( 3022_{5} - 2433_{5} \)
+    
+        \answer
+
+        Here, I use that ``borrowing'' from the digit to the left is equivalent to decrementing that digit by one and incrementing the current digit by the base, 5.
+
+        \medskip
+
+        Step 1:
+        \begin{tabular}{ccccc}
+            & 3& 0& 2 - 1& 2 + 5 \\
+            - & 2& 4& 3& 3 \\
+            \hline
+            & x& x& x& 4
+        \end{tabular}
+
+        Step 2:
+        \begin{tabular}{ccccc}
+            & 3& 0 - 1& 1 + 5& 7 \\
+            - & 2& 4& 3& 3 \\
+            \hline
+            & x& x& 3& 4
+        \end{tabular}
+
+        Step 3:
+        \begin{tabular}{ccccc}
+            & 3 - 1& -1 + 5& 6& 7 \\
+            - & 2& 4& 3& 3 \\
+            \hline
+            & x& 0& 3& 4
+        \end{tabular}
+
+        Step 4:
+        \begin{tabular}{ccccc}
+            & 2& 4& 6& 7 \\
+            - & 2& 4& 3& 3 \\
+            \hline
+            & 0& 0& 3& 4
+        \end{tabular}
+
+        Final:
+        \begin{tabular}{ccccc}
+            Actual & 2& 4& 6& 7 \\
+            \\
+            & 3& 0& 2& 2 \\
+            - & 2& 4& 3& 3 \\
+            \hline
+            & 0& 0& 3& 4
+        \end{tabular}
+
+\end{enumerate}
+\newpage
+
+\subsection*{Question 3:}
+
+\subsubsection{A. Convert the following numbers to their 8-bits two's complement representation.}
+For these questions, I first convert from decimal to unsigned binary. If the decimal number is positive, then left pad to 8 bits with 0's (if needed) and that is the two's complement. If the decimal number is negative, then left pad to 8 bits with 0's (if needed) and perform \( \neg a + 00000001 \). This is the same as finding the \( x \) that solves \( a + x = 100000000 \).
+
+\begin{enumerate}
+
+    \item \( 124_{10} \)
+    
+        \answer
+        \begin{itemize}
+            \item Iteration 1: \( 124 / 2 = 62, \text{remainder } 0 \)
+            \item Iteration 2: \( 62 / 2 = 31, \text{remainder } 0 \)
+            \item Iteration 3: \( 31 / 2 = 15, \text{remainder } 1 \)
+            \item Iteration 4: \( 15 / 2 = 7, \text{remainder } 1 \)
+            \item Iteration 5: \( 7 / 2 = 3, \text{remainder } 1 \)
+            \item Iteration 6: \( 3 / 2 = 1, \text{remainder } 1 \)
+            \item Iteration 7: \( 1 / 2 = 0, \text{remainder } 1 \)
+        \end{itemize}
+
+        This returns 1111100, which is 7 digits, and since the original number is positive, all we have to do is left pad with a zero, so \( 124_{10} = 01111100_{2's} \)
+
+    \item \( -124_{10} \)
+    
+        \answer
+
+        From the previous question, the 8-bits two's complement of 124 is \( 01111100 \). Negating every digit returns \( 10000011 \)
+
+        \begin{tabular}{ccccccccc}
+            Carry Over &0& 0& 0& 0& 0& 1& 1& 0 \\
+            \\
+            & 1& 0& 0& 0& 0& 0& 1& 1 \\
+            + & 0& 0& 0& 0& 0& 0& 0& 1 \\
+            \hline
+            & 1& 0& 0& 0& 0& 1& 0& 0
+        \end{tabular}
+
+    \item \( 109_{10} \)
+    
+        \answer
+        \begin{itemize}
+            \item Iteration 1: \( 109 / 2 = 54, \text{remainder } 1 \)
+            \item Iteration 2: \( 54 / 2 = 27, \text{remainder } 0 \)
+            \item Iteration 3: \( 27 / 2 = 13, \text{remainder } 1 \)
+            \item Iteration 4: \( 13 / 2 = 6, \text{remainder } 1 \)
+            \item Iteration 5: \( 6 / 2 = 3, \text{remainder } 0 \)
+            \item Iteration 6: \( 3 / 2 = 1, \text{remainder } 1 \)
+            \item Iteration 7: \( 1 / 2 = 0, \text{remainder } 1 \)
+        \end{itemize}
+
+        \( 109_{10} =  01101101_{\text{8 bit 2's comp}} \)
+        
+    \item \( -79_{10} \)
+    
+        \answer
+
+        Step 1: Find the 8-bits two's complement of positive \( 79_{10} \).
+
+        \begin{itemize}
+            \item Iteration 1: \( 79 / 2 = 39, \text{remainder } 1 \)
+            \item Iteration 2: \( 39 / 2 = 19, \text{remainder } 1 \)
+            \item Iteration 3: \( 19 / 2 = 9, \text{remainder } 1 \)
+            \item Iteration 4: \( 9 / 2 = 4, \text{remainder } 1 \)
+            \item Iteration 5: \( 4 / 2 = 2, \text{remainder } 0 \)
+            \item Iteration 6: \( 2 / 2 = 1, \text{remainder } 0 \)
+            \item Iteration 7: \( 1 / 2 = 0, \text{remainder } 1 \)
+        \end{itemize}
+        Which means \( 79_{10} = 01001111_{\text{8 bit 2's comp}} \)
+
+        \medskip
+
+        Step 2: The negation then is \( 10110000_{\text{8 bit 2's comp}} \)
+
+        \begin{tabular}{ccccccccc}
+            Carry Over &0& 0& 0& 0& 0& 0& 0& 0 \\
+            \\
+            & 1& 0& 1& 1& 0& 0& 0& 0 \\
+            + & 0& 0& 0& 0& 0& 0& 0& 1 \\
+            \hline
+            & 1& 0& 1& 1& 0& 0& 0& 1
+        \end{tabular}
+
+        \( -79_{10} = 10110001_{\text{8 bit 2's comp}} \)
+
+\end{enumerate}
+
+\subsubsection{B. Convert the following 8-bit two's complement numbers to their decimal representations.}
+For these questions, I use that the leftmost digit indicates the sign of the number. If the leftmost digit is 0, then the number is positive, and the formula in Question 1, Section A can be used on the remaining 7 digits to get the decimal representation. If the leftmost digit is 1, the number is negative, and the process is to first find the complement, and then convert that to the decimal representation and multiply by \( -1 \). An alternative method shown in class is to use the aforementioned expansion, but the leftmost digit is multiplied by \( -1 \).
+
+\begin{enumerate}
+    
+    \item \( 00011110_{\text{8 bit 2's comp}} \)
+    
+        \answer
+
+        \begin{align*}
+            00011110_{\text{8 bit 2's comp}} &= 0(2^0) + 1(2^1) + 1(2^2) + 1(2^3) + 1(2^4) + 0(2^5) + 0(2^6) \\
+                                             &= 0 + 2 + 4 + 8 + 16 + 0 + 0 \\
+                                             &= 30_{10}
+        \end{align*}
+
+    \item \( 11100110_{\text{8 bit 2's comp}} \)
+    
+        \answer
+
+        \begin{align*}
+            11100110_{\text{8 bit 2's comp}} &= 0(2^0) + 1(2^1) + 1(2^2) + 0(2^3) + 0(2^4) + 1(2^5) + 1(2^6) - 1(2^7)\\
+                                             &= 0 + 2 + 4 + 0 + 0 + 32 + 64 - 128 \\
+                                             &= -26_{10}
+        \end{align*}
+
+    \item \( 00101101_{\text{8 bit 2's comp}} \)
+    
+        \answer
+
+        \begin{align*}
+            00101101_{\text{8 bit 2's comp}} &= 1(2^0) + 0(2^1) + 1(2^2) + 1(2^3) + 0(2^4) + 1(2^5) + 0(2^6) \\
+                                             &= 1 + 0 + 4 + 8 + 0 + 32 + 0 \\
+                                             &= 45_{10}
+        \end{align*}
+
+    \item \( 10011110_{\text{8 bit 2's comp}} \)
+    
+        \answer
+
+        \begin{align*}
+            10011110_{\text{8 bit 2's comp}} &= 0(2^0) + 1(2^1) + 1(2^2) + 1(2^3) + 1(2^4) + 0(2^5) + 0(2^6) - 1(2^7)\\
+                                             &= 0 + 2 + 4 + 8 + 16 + 0 + 0 - 128 \\
+                                             &= -98_{10}            
+        \end{align*}
+    
+\end{enumerate}
+\newpage
+
+\subsection*{Question 4:}
+
+\begin{itemize}
+    \item The operator \( \lor \) is an inclusive or, so \( p \lor q \) is True when at least one of \( p \) or \( q \) is True.
+    \item The operator \( \xor \) is an exclusive or, so \( p \xor q \) is True when only one of \( p \) or \( q \) is True, and False otherwise.
+    \item The operator \( \land \) returns True when both of the predicates are True, and False otherwise.
+    \item The negation of True is False, and vice versa.
+    \item The \( p \implies q \) returns False when \( p \) is True and \( q \) is False, and False otherwise.
+\end{itemize}
+
+\begin{enumerate}
+    
+    \item zyBooks Exercise 1.2.4, b-c
+    
+        \begin{enumerate}
+
+            \item[(b)] Write a truth table for \( \neg(p \lor q) \)
+            
+                \answer
+
+                \begin{tabular}{|l|l|l|l|}
+                    \hline
+                    \( p \) & \( q \) & \( p \lor q \) & \( \neg(p \lor q) \) \\ \hline
+                    T & T & T & F \\ \hline
+                    T & F & T & F \\ \hline
+                    F & T & T & F \\ \hline
+                    F & F & F & T \\ \hline
+                \end{tabular}
+    
+            \item[(c)] Write a truth table for \( r \lor (p \land \neg q) \)
+        
+                \answer
+        
+                \begin{tabular}{|l|l|l|l|l|l|}
+                    \hline
+                    \( p \) & \( q \) & \( r \) & \( \neg q \) & \( p \land \neg q\) & \( r \lor (p \land \neg q) \) \\ 
+                    \hline
+                    T & T & T & F & F & T \\ \hline
+                    T & T & F & F & F & F \\ \hline
+                    T & F & T & T & T & T \\ \hline
+                    T & F & F & T & T & T \\ \hline
+                    F & T & T & F & F & T \\ \hline
+                    F & T & F & F & F & F \\ \hline
+                    F & F & T & T & F & T \\ \hline
+                    F & F & F & T & F & F \\ \hline
+                \end{tabular}
+    
+        \end{enumerate}
+
+    \item zyBooks Exercise 1.3.4, b and d
+    
+        \begin{enumerate}
+            
+            \item[(b)] Give a truth table for \( (p \implies q) \implies (q \implies p) \)
+
+                \answer
+
+                \begin{tabular}{|l|l|l|l|l|}
+                    \hline
+                    \( p \) & \( q \) & \( p \implies q \) & \(q \implies p \) & \( (p \implies q) \implies (q \implies p) \) \\ 
+                    \hline
+                    T & T & T & T & T \\ \hline
+                    T & F & F & T & T \\ \hline
+                    F & T & T & F & F \\ \hline
+                    F & F & T & T & T \\ \hline
+                \end{tabular}
+            
+                \item[(d)] Give a truth table for \( (p \iff q) \xor (p \iff \neg q) \)
+                
+                    \answer
+
+                    \begin{tabular}{|l|l|l|l|l|l|}
+                        \hline
+                        \( p \) & \( q \) & \( p \iff q \) & \( \neg q \) & \( p \iff \neg q \) & \( (p \iff q) \xor (p \iff \neg q) \) \\ \hline
+                        T & T & T & F & F & T \\ \hline
+                        T & F & F & T & T & T \\ \hline
+                        F & T & F & F & T & T \\ \hline
+                        F & F & T & T & F & T \\ \hline
+                    \end{tabular}
+
+        \end{enumerate}
+
+\end{enumerate}
+\newpage
+
+\subsection*{Question 5:}
+
+\begin{enumerate}
+    
+    \item zyBooks Exercise 1.2.7, b-c
+    
+        \begin{itemize}
+            \item B: Applicant presents a birth certificate
+            \item D: Applicant presents a driver's license
+            \item M: Applicant presents a marriage license
+        \end{itemize}
+    
+        \begin{enumerate}
+            
+            \item[(b)] The applicant must present at least two of the following forms of identification: birth certificate, driver's license, marriage license.
+
+                \answer
+
+                Since \( \land \) is commutative, \( p \land q \equiv q \land p \), and \( {3 \choose 2} = 3 \). There are 3 different unique combinations of the birth certificate, driver's license, and marriage license. So, the logical expression for this statement is \( (B \land D) \lor (B \land M) \lor (D \land M) \)    
+                
+            \item[(c)] Applicant must present either a birth certificate or both a driver's license and a marriage license.
+
+                \answer
+
+                \( B \lor (D \land M) \)
+
+        \end{enumerate}
+
+    \item zyBooks Exercise 1.3.7, b-e
+    
+        \begin{itemize}
+            \item s: a person is a senior
+            \item y: a person is at least 17 years of age
+            \item p: a person is allowed to park in the school parking lot
+        \end{itemize}
+    
+        \begin{enumerate}
+            
+            \item[(b)] A person can park in the school parking lot if they are a senior or at least seventeen years of age.
+            
+                \answer
+                
+                This sentence can be reworded as ``If you are a senior or at least seventeen years old, you can park in the school parking lot''. So \( (s \lor y) \implies p \)
+
+            \item[(c)] Being 17 years of age is a necessary condition for being able to park in the school parking lot.
+            
+                \answer
+
+                \( p \implies y \)
+
+
+            \item[(d)] A person can park in the school parking lot if and only if the person is a senior and at least 17 years of age.
+            
+                \answer
+
+                \( p \iff (s \land y) \)
+
+            \item[(e)] Being able to park in the school parking lot implies that the person is either a senior or at least 17 years old.
+            
+                \answer
+
+                \( p \implies (s \lor y) \)
+
+        \end{enumerate}
+
+    \item zyBooks Exercise 1.3.9, c-d
+    
+        \begin{itemize}
+            \item y: the applicant is at least eighteen years old
+            \item p: the applicant has parental permission
+            \item c: the applicant can enroll in the course
+        \end{itemize}
+    
+        \begin{enumerate}
+            
+            \item[(c)] The applicant can enroll in the course only if the applicant has parental permission.
+            
+                \answer
+
+                \( c \implies p \)
+
+            \item[(d)] Having parental permission is a necessary condition for enrolling in the course.
+        
+                \answer
+
+                \( c \implies p \)
+
+        \end{enumerate}
+
+\end{enumerate}
+\newpage
+
+\subsection*{Question 6:}
+
+\begin{enumerate}
+    
+    \item zyBooks Exercise 1.3.6, b-d
+    
+        \begin{enumerate}
+
+            \item[(b)] Maintaining a B average is necessary for Joe to be eligible for the honors program.
+            
+                \answer
+
+                If Joe is eligible for the honors program, then he maintained a B average.
+
+            \item[(c)] Rajiv can go on the roller coaster only if he is at least four feet tall.
+            
+                \answer
+
+                If Rajiv can go on the roller coaster, then he is at least four feet tall.
+
+            \item[(d)] Rajiv can go on the roller coaster if he is at least four feet tall.
+            
+                \answer
+
+                If Rajiv is at least four feet tall, then Rajiv can go on the roller coaster.
+            
+        \end{enumerate}
+
+    \item zyBooks Exercise 1.3.10, c-f
+    
+    The variable \( p \) is True, \( q \) is False, and the truth value for variable \( r \) is unknown. Indicate whether the truth value of each logical expression is True, False, or unknown. For these questions, I create a truth table, and if the outcome of the expression is the same for both values of \( r \), then that outcome is the truth value of the expression. If not, it is unknown. 
+    
+        \begin{enumerate}
+            
+            \item[(c)] \( (p \lor r) \iff (q \land r) \)
+            
+                \answer
+
+                \begin{tabular}{|l|l|l|l|l|l|}
+                    \hline
+                    \( p \) & \( q \) & \( r \) & \( p \lor r \) & \( q \land r \) & \( (p \lor r) \iff (q \land r) \) \\ \hline
+                    T & F & T & T & F & F \\ \hline
+                    T & F & F & T & F & F \\ \hline
+                \end{tabular}
+
+                So the truth value is False.
+
+            \item[(d)] \( (p \land r) \iff (q \land r) \)
+
+                \answer
+
+                \begin{tabular}{|l|l|l|l|l|l|}
+                    \hline
+                    \( p \) & \( q \) & \( r \) & \( p \land r \) & \( q \land r \) & \( (p \land r) \iff (q \land r) \) \\ \hline
+                    T & F & T & T & F & F \\ \hline
+                    T & F & F & F & F & T \\ \hline
+                \end{tabular}
+                
+                So the truth value is Unknown.
+
+            \item[(e)] \( p \implies (r \lor q) \)
+
+                \answer
+
+                \begin{tabular}{|l|l|l|l|l|}
+                    \hline
+                    \( p \) & \( q \) & \( r \) & \( r \lor q \) & \( p \implies (r \lor q) \) \\ \hline
+                    T & F & T & T & T \\ \hline
+                    T & F & F & F & F \\ \hline
+                \end{tabular}
+
+                So the truth value is Unknown.
+
+            \item[(f)] \( (p \land q) \implies r \)
+            
+                \answer
+
+                \begin{tabular}{|l|l|l|l|l|}
+                    \hline
+                    \( p \) & \( q \) & \( r \) & \( p \land q \) & \( (p \land q) \implies r \) \\ \hline
+                    T & F & T & F & T \\ \hline
+                    T & F & F & F & T \\ \hline
+                \end{tabular}
+
+                So the truth value is True.
+
+        \end{enumerate}
+
+\end{enumerate}
+\newpage
+
+\subsection*{Question 7:}
+
+\begin{enumerate}
+    
+    \item zyBooks Exercise 1.4.5, b-d
+    
+    For these questions, I create the truth tables for both expressions, and if the truth tables are equivalent, then the expressions are equivalent.
+    
+        \begin{itemize}
+            \item j: Sally got the job.
+            \item l: Sally was late for her interview.
+            \item r: Sally updated her resume.
+        \end{itemize}
+    
+        \begin{enumerate}
+            
+            \item[(b)] 
+
+            Statement 1: If Sally did not get the job, then she was late for her interview or did not update her resume.
+
+            Statement 2: If Sally did not get the job, then she was late for her interview. 
+            
+                \answer
+
+                Step 1: Convert to logical expression
+
+                Statement 1: \( \neg j \implies (l \lor \neg r) \)
+
+                Statement 2: \( (r \land \neg l) \implies j \)
+
+                \medskip
+
+                Step 2: Create truth table
+
+                \begin{tabular}{|l|l|l|l|l|l|l|l|l|l|}
+                    \hline
+                    \( l \) & \( r \) & \( j \) & \( \neg l \) & \( \neg r \) & \( \neg j \) & \( l \lor \neg r \) & \( r \land \neg l \) & \( \neg j \implies (l \lor \neg r) \) & \( (r \land \neg l) \implies j \) \\ \hline
+                    T & T & T & F & F & F & T & F & T & T \\ \hline
+                    T & T & F & F & F & T & T & F & T & T \\ \hline
+                    T & F & T & F & T & F & T & F & T & T \\ \hline
+                    T & F & F & F & T & T & T & F & T & T \\ \hline
+                    F & T & T & T & F & F & F & T & T & T \\ \hline
+                    F & T & F & T & F & T & F & T & F & F \\ \hline
+                    F & F & T & T & T & F & T & F & T & T \\ \hline
+                    F & F & F & T & T & T & T & F & T & T \\ \hline
+                \end{tabular}
+
+                So the two statements are logically equivalent.
+
+            \item[(c)] 
+            
+            Statement 1: If Sally got the job then she was not late for her interview.
+
+            Statement 2: If Sally did not get the job, then she was late for her interview.
+
+                \answer
+
+                Step 1: Convert to logical expression
+
+                Statement 1: \( j \implies \neg l \)
+
+                Statement 2: \( \neg j \implies l \)
+
+                \medskip
+
+                Step 2: Create truth table
+
+                \begin{tabular}{|l|l|l|l|l|l|}
+                    \hline
+                    \( l \) & \( j \) & \( \neg l \) & \( \neg j \) & \( j \implies \neg l \) & \( \neg j \implies l \) \\ \hline
+                    T & T & F & F & F & T \\ \hline
+                    T & F & F & T & T & T \\ \hline
+                    F & T & T & F & T & T \\ \hline
+                    F & F & T & T & T & F \\ \hline
+                \end{tabular}
+
+                So the two statements are not logically equivalent.
+
+            \item[(d)] 
+            
+            Statement 1: If Sally updated her resume or she was not late for her interview, then she got the job.
+
+            Statement 2: If Sally got the job, then she updated her resume and was not late for her interview.
+
+                \answer
+
+                Step 1: Convert to logical expression
+
+                Statement 1: \( (r \lor \neg l) \implies j \)
+
+                Statement 2: \( j \implies (r \land \neg l) \)
+
+                \medskip
+
+                Step 2: Create truth table
+
+                \begin{tabular}{|l|l|l|l|l|l|l|l|}
+                    \hline
+                    \( l \) & \( r \) & \( j \) & \( \neg l \) & \( r \lor \neg l \) & \( r \land \neg l \) & \( (r \lor \neg l) \implies j \) & \( j \implies (r \land \neg l) \) \\ \hline
+                    T & T & T & F & T & F & T & F \\ \hline
+                    T & T & F & F & T & F & F & T \\ \hline
+                    T & F & T & F & F & F & T & F \\ \hline
+                    T & F & F & F & F & F & T & T \\ \hline
+                    F & T & T & T & T & T & T & T \\ \hline
+                    F & T & F & T & T & T & F & T \\ \hline
+                    F & F & T & T & T & F & T & F \\ \hline
+                    F & F & F & T & T & F & F & T \\ \hline
+                \end{tabular}
+
+                So the two statements are not logically equivalent.
+
+        \end{enumerate}
+
+\end{enumerate}
+\newpage
+
+\subsection*{Question 8:}
+
+\begin{enumerate}
+    
+    \item zyBooks Exercise 1.5.2, c, f, i
+    
+        \begin{enumerate}
+            
+            \item[(c)] \( (p \implies q) \land (p \implies r) \equiv p \implies (q \land r) \)
+            
+                \answer
+                \begin{align*}
+                    (p \implies q) \land (p \implies r) &\equiv (\neg p \lor q) \land (\neg p \lor r), \text{ by Conditional Identities} \\
+                                                        &\equiv \neg p \lor (q \land r), \text{ by Distributive Laws} \\
+                                                        &\equiv \neg \neg p \implies (q \land r), \text{ by Conditional Identities} \\
+                                                        &\equiv p \implies (q \land r), \text{ by Double Negation Law}
+                \end{align*}
+            
+            \item[(f)] \( \neg (p \lor (\neg p \land q)) \equiv \neg p \land \neg q \)
+            
+                \answer
+                \begin{align*}
+                    \neg (p \lor (\neg p \land q)) &\equiv \neg p \land (\neg (\neg p \land q)), \text{ by De Morgan's Laws} \\
+                                                   &\equiv \neg p \land (\neg \neg p \lor \neg q), \text{ by De Morgan's Laws} \\
+                                                   &\equiv \neg p \land (p \lor \neg q), \text{ by Double Negation Law} \\
+                                                   &\equiv (\neg p \land p) \lor (\neg p \land \neg q), \text{by Distributive Laws} \\
+                                                   &\equiv F \lor (\neg p \land \neg q), \text{ by Complement Laws} \\
+                                                   &\equiv (\neg p \land \neg q) \lor F, \text{ by Commutative Laws} \\
+                                                   &\equiv \neg p \land \neg q, \text{ by Identity Laws}
+                \end{align*}
+
+            \item[(i)] \( (p \land q) \implies r \equiv (p \land \neg r) \implies \neg q \)
+            
+                \answer
+                \begin{align*}
+                    (p \land \neg r) \implies \neg q &\equiv \neg (p \land \neg r) \lor \neg q, \text{ by Conditional Identities} \\
+                                                     &\equiv (\neg p \lor r) \lor \neg q, \text{ by De Morgan's Laws} \\
+                                                     &\equiv (\neg p \lor \neg q) \lor r, \text{ by Commutative Laws} \\
+                                                     &\equiv \neg (p \land q) \lor r, \text{ by De Morgan's Laws} \\
+                                                     &\equiv (p \land q) \implies r, \text{ by Conditional Identities}
+                \end{align*}
+
+        \end{enumerate}
+
+    \item zyBooks Exercise 1.5.3, c and d
+    
+        \begin{enumerate}
+            
+            \item[(c)] \( \neg r \lor (\neg r \implies p) \)
+            
+                \answer
+                \begin{align*}
+                    \neg r \lor (\neg r \implies p) &\equiv \neg r \lor (\neg \neg r \lor p), \text{ by Conditional Identities} \\
+                                                    &\equiv \neg r \lor (r \lor p), \text{ by Double Negation Law} \\
+                                                    &\equiv (\neg r \lor r) \lor p, \text{ by Associative Laws} \\
+                                                    &\equiv T \lor p, \text{ by Complement Laws} \\
+                                                    &\equiv p \lor T, \text{ by Commutative Laws} \\
+                                                    &\equiv T, \text{ by Domination Laws}
+                \end{align*}
+
+            \item[(d)] \( \neg (p \implies q) \implies \neg q \)
+            
+                \answer
+                \begin{align*}
+                    \neg (p \implies q) \implies \neg q &\equiv \neg (\neg p \lor q) \implies \neg q, \text{ by Conditional Identities} \\
+                                                        &\equiv (\neg \neg p \land \neg q) \implies \neg q, \text{ by De Morgan's Laws} \\
+                                                        &\equiv (p \land \neg q) \implies \neg q, \text{ by Double Negation Law} \\
+                                                        &\equiv \neg(p \land \neg q) \lor \neg q, \text{ by Conditional Identities} \\
+                                                        &\equiv (\neg p \lor \neg \neg q) \lor \neg q, \text{ by De Morgan's Laws} \\
+                                                        &\equiv (\neg p \lor q) \lor \neg q, \text{ by Double Negation Law} \\
+                                                        &\equiv \neg p \lor (q \lor \neg q), \text{ by Commutative Laws} \\
+                                                        &\equiv \neg p \lor T, \text{ by Complement Laws} \\
+                                                        &\equiv T, \text{ by Domination Laws}
+                \end{align*}
+
+        \end{enumerate}
+
+\end{enumerate}
+\newpage
+
+\subsection*{Question 9:}
+
+\begin{enumerate}
+    
+    \item zyBooks Exercise 1.6.3, c and d
+    
+    Write a logical expression with the same meaning. The domain is the set of all real numbers.
+    
+        \begin{enumerate}
+            
+            \item[(c)] There is a number that is equal to its square.
+            
+                \answer
+
+                \( \exists x (x = x^2) \)
+
+            \item[(d)] Every number is less than or equal to its square.
+            
+                \answer
+
+                \( \forall x (x <= x^2) \)
+
+        \end{enumerate}
+
+    \item zyBooks Exercise 1.7.4, b-d
+    
+    Translate English statements into a logical expression. The domain is a set of employees who work at a company. Ingrid is one of the employees at the company.
+
+    \begin{itemize}
+        \item S(x): x was sick yesterday
+        \item W(x): x went to work yesterday
+        \item V(x): x was on vacation yesterday
+    \end{itemize}
+    
+        \begin{enumerate}
+            
+            \item[(b)] Everyone was well and went to work yesterday.
+            
+                \answer
+
+                \( \forall x (\neg S(x) \land W(x)) \)
+
+            \item[(c)] Everyone who was sick yesterday did not go to work.
+            
+                \answer
+
+                \( \forall x (S(x) \implies \neg W(x)) \)
+
+            \item[(d)] Yeserday someone was sick and went to work.
+            
+                \answer
+
+                \( \exists x (S(x) \land W(x)) \)
+
+        \end{enumerate}
+
+\end{enumerate}
+\newpage
+
+\subsection*{Question 10:}
+
+\begin{enumerate}
+    
+    \item zyBooks Exercise 1.7.9, c-i
+    
+    The domain for this question is the set \( \{ a, b, c, d, e \} \). The following table gives the value of predicates P, Q, and R for each element in the domain. Using these values, determine whether each quantified expression evaluates to true or false.
+
+    \begin{center}
+        \begin{tabular}{|l|l|l|l|}
+            \hline
+            & P(x) & Q(x) & R(x) \\ \hline
+            a & T & T & F \\ \hline
+            b & T & F & F \\ \hline
+            c & F & T & F \\ \hline
+            d & T & T & F \\ \hline
+            e & T & T & T \\ \hline
+        \end{tabular}
+    \end{center}
+    
+        \begin{enumerate}
+
+            \item[(c)] \( \exists x((x = c) \implies P(x)) \) 
+            
+                \answer
+
+                False, since if \( x = c \), then \( P(x) \) is False since \( P(c) \) is False.
+
+            \item[(d)] \( \exists x (Q(x) \land R(x)) \)
+            
+                \answer
+
+                True, since \( Q(e) \) is True and \( R(e) \) is True.
+
+            \item[(e)] \( Q(a) \land P(d) \)
+            
+                \answer
+
+                True, since \( Q(a) \) is True and \( P(d) \) is True.
+
+            \item[(f)] \( \forall x (x \neq b) \implies Q(x) \)
+            
+                \answer
+
+                True, since \( Q(a), Q(c), Q(d), Q(e) \) are all True.
+
+            \item[(g)] \( \forall x (P(x) \lor R(x)) \)
+            
+                \answer
+
+                False, since \( P(c) \) and \( R(c) \) are both False.
+
+            \item[(h)] \( \forall x (R(x) \implies P(x)) \)
+            
+                \answer
+
+                True, since \( R(x) \) is False for \( a \) through \( d \), which means the statement is True, and for \( e \) \( R(e) \) is True and \( P(e) \) is True.
+
+            \item[(i)] \( \exists x (Q(x) \lor R(x)) \)
+            
+                \answer
+
+                True, since \( Q(a) \) is True.
+
+        \end{enumerate}
+
+    \item zyBooks Exercise 1.9.2, b-i
+    
+    The tables below show the values of predicates P(x, y), Q(x, y), and S(x, y) for every possible combination of values of the variables x and y. The row number indicates the value for x and the column number indicates the value for y. The domain for x and y is {1, 2, 3}.
+    
+    \begin{minipage}{.32\textwidth}
+        \centering
+        \begin{tabular}{|l|l|l|l|}
+            \hline
+            P & 1 & 2 & 3 \\ \hline
+            1 & T & F & T \\ \hline
+            2 & T & F & T \\ \hline
+            3 & T & T & F \\ \hline
+        \end{tabular}
+    \end{minipage}
+    \begin{minipage}{.32\textwidth}
+        \centering
+        \begin{tabular}{|l|l|l|l|}
+            \hline
+            Q & 1 & 2 & 3 \\ \hline
+            1 & F & F & F \\ \hline
+            2 & T & T & T \\ \hline
+            3 & T & F & F \\ \hline
+        \end{tabular}
+    \end{minipage}
+    \hfill
+    \begin{minipage}{.32\textwidth}
+        \centering
+        \begin{tabular}{|l|l|l|l|}
+            \hline
+            S & 1 & 2 & 3 \\ \hline
+            1 & F & F & F \\ \hline
+            2 & F & F & F \\ \hline
+            3 & F & F & F \\ \hline
+        \end{tabular}
+    \end{minipage}
+
+        \begin{enumerate}
+            
+            \item[(b)] \( \exists x \forall y Q(x, y) \)
+
+                \answer
+
+                True, since \( x = 2 \) satisfies the expression.
+
+            \item[(c)] \( \exists y \forall x P(x, y) \)
+            
+                \answer
+
+                True, since \( y = 1 \) satisfies the expression.
+
+            \item[(d)] \( \exists x \exists y S(x) \)
+            
+                \answer
+
+                False, since all choices of \( x, y \) result in the \( S \) table result in False.
+
+            \item[(e)] \( \forall x \exists y Q(x, y) \)
+            
+                \answer 
+
+                False, since for \( x = 1 \), all choices of \( y \) result in False.
+
+            \item[(f)] \( \forall x \exists y P(x, y) \)
+            
+                \answer
+
+                True, since for example any choice of \( x \), \( y = 1 \) will always result in True.
+
+            \item[(g)] \( \forall x \forall y P(x, y) \)
+            
+                \answer
+
+                False, since there is a counterexample \( x = 1, y = 2 \).
+
+            \item[(h)] \( \exists x \exists y Q(x, y) \)
+            
+                \answer
+
+                True, since \( x = 2 , y = 1 \) is True.
+
+            \item[(i)] \( \forall x \forall y \neg S(x, y) \)
+            
+                \answer
+
+                True, since the whole \( S \) table is False.
+
+        \end{enumerate}
+
+\end{enumerate}
+\newpage
+
+\subsection*{Question 11:}
+
+\begin{enumerate}
+    
+    \item zyBooks Exercise 1.10.4, c-g
+    
+    Translate each of the following English statements into logical expressions. The domain is the set of all real numbers.
+
+        \begin{enumerate}
+            
+            \item[(c)] There are two numbers whose sum is equal to their product.
+            
+                \answer
+
+                \( \exists x \exists y (x + y = xy) \)
+
+            \item[(d)] The ratio of every two positive numbers is also positive.
+            
+                \answer 
+
+                \( \forall x \forall y ((x > 0 \land y > 0) \implies x / y > 0) \)
+
+            \item[(e)] The reciprocal of every positive number less than one is greater than one.
+            
+                \answer
+
+                \( \forall x ((x < 1 \land x > 0) \implies \frac{1}{x} > 1) \)
+
+            \item[(f)] There is no smallest number.
+            
+                \answer
+
+                If there is an \( x \) such that every \( y \) is greater (or equal) to it, then that \( x \) is the smallest number. So the negation of this expression would be equivalent to ``there is no smallest number''.
+
+                \( \neg \exists x \forall y (y \geq x) \)
+
+            \item[(g)] Every number other than 0 has a multiplicative inverse.
+            
+                \answer
+
+                \( \forall x \exists y (x \neq 0 \implies xy = 1) \)
+            
+        \end{enumerate}
+
+    \item zyBooks Exercise 1.10.7, c-f
+    
+    The domain is a group working on a project at a company. One of the members of the group is named Sam. Define the following predicates.
+
+    \begin{itemize}
+        \item P(x, y): x knows y's phone number. (A person may or may not know their own phone number.)
+        \item D(x): x missed the deadline.
+        \item N(x): x is a new employee.
+    \end{itemize}
+
+        \begin{enumerate}
+            
+            \item[(c)] There is at least one new employee who missed the deadline.
+            
+                \answer
+
+                \( \exists x N(x) \land D(x) \)
+
+            \item[(d)] Sam knows the phone number of everyone who missed the deadline.
+            
+                \answer
+
+                \( \forall y D(y) \implies P(Sam, y) \)
+
+            \item[(e)] There is a new employee who knows everyone's phone number.
+            
+                \answer
+
+                \( \exists x \forall y N(x) \land P(x, y) \)
+
+            \item[(f)] Exactly one new employee missed the deadline.
+            
+                \answer
+
+                There exists a new employee that missed the deadline, and everyone else did not miss the deadline.
+
+                \( \exists x (N(x) \land D(x)) \land \forall y (N(y) \implies y = x) \)
+
+                \( \exists x \forall y ((N(x) \land D(x)) \land (N(y) \implies y = x)) \)
+
+        \end{enumerate}
+
+    \item zyBooks Exercise 1.10.10, c-f
+    
+    The domain for the first input variable to predicate T is a set of students at a university. The domain for the second input variable to predicate T is the set of Math classes offered at that university. The predicate T(x, y) indicates that student x has taken class y. Sam is a student at the university and Math 101 is one of the courses offered at the university. Give a logical expression for each sentence.
+
+        \begin{enumerate}
+
+            \item[(c)] Every student has taken at least one class other than Math 101.
+            
+                \answer
+
+                \( \forall x \exists y T(x, y) \land (y \neq \text{Math 101}) \)
+
+            \item[(d)] There is a student who has taken every math class other than Math 101.
+            
+                \answer
+
+                \( \exists x \forall y T(x, y) \land (y \neq \text{Math 101}) \)
+
+            \item[(e)] Everyone other than Sam has taken at least two different math classes.
+            
+                \answer
+
+                For every student, if the student is not Sam, then there exists a math class A and a math class B, where A does not equal B, and the student x has taken A and has taken B.
+     
+                \( 
+                    \forall x (x \neq \text{Sam}) \implies 
+                    \exists a \exists b (a \neq b) \land T(x, a) \land T(x, b) 
+                \)
+
+            \item[(f)] Sam has taken exactly two math classes.
+            
+                \answer
+
+                Sam has taken at least two different math classes, and for every other math class, if Sam took that math class, then that class must be \( a \) or \( b \).
+
+                \( 
+                    \exists a \exists b ((a \neq b) \land T(\text{Sam}, a) \land T(\text{Sam}, b)) 
+                    \land \forall y T(\text{Sam}, y) \implies (y = a) \lor (y = b)
+                \)
+
+        \end{enumerate}
+
+\end{enumerate}
+\newpage
+
+\subsection*{Question 12:}
+
+\begin{enumerate}
+
+    \item zyBooks Exercise 1.8.2, b-e
+    
+    In the following question, the domain is a set of male patients in a clinical study. Define the following predicates:
+
+    \begin{itemize}
+        \item P(x): x was given the placebo
+        \item D(x): x was given the medication
+        \item M(x): x had migraines
+    \end{itemize}
+
+    Translate each statement into a logical expression. Then negate the expression by adding a negation operation to the beginning of the expression. Apply De Morgan's law until each negation operation applies directly to a predicate and then translate the logical expression back into English. 
+    
+        \begin{enumerate}
+            
+            \item[(b)] Every patient was given the medication or the placebo or both.
+            
+                \answer
+
+                Step 1:
+
+                \( \forall x D(x) \lor P(x) \lor (P(x) \land D(x)) \)
+
+                \medskip
+
+                Step 2: Applying De Morgan's Law for each step
+                \begin{align*}
+                    \neg \forall x D(x) \lor P(x) \lor (P(x) \land D(x)) &\equiv \exists x \neg (D(x) \lor P(x) \lor (P(x) \land D(x))) \\
+                        &\equiv \exists x \neg ((D(x) \lor P(x)) \lor (P(x) \land D(x))) \\
+                        &\equiv \exists x \neg (D(x) \lor P(x)) \land \neg (P(x) \land D(x)) \\
+                        &\equiv \exists x \neg D(x) \land \neg P(x) \land (\neg P(x) \lor \neg D(x)) \\
+                \end{align*}
+
+                \medskip
+
+                Step 3:
+
+                There exists a patient who was not given the placebo and not given the medication and not given both.
+
+            \item[(c)] There is a patient who took the medication and had migraines.
+            
+                \answer
+
+                Step 1: 
+
+                \( \exists x D(x) \land M(x) \)
+
+                \medskip
+
+                Step 2:
+                \begin{align*}
+                    \neg \exists x D(x) \land M(x) &\equiv \forall x \neg (D(x) \land M(x)) \\
+                                                   &\equiv \forall x \neg D(x) \lor \neg M(x)
+                \end{align*}
+
+                \medskip
+                
+                Step 3:
+
+                Every patient did not take the medication or did not get a migraine.
+
+            \item[(d)] Every patient who took the placebo had migraines.
+
+                \answer
+
+                Step 1:
+
+                \( \forall x P(x) \implies M(x) \)
+
+                \medskip
+
+                Step 2:
+                \begin{align*}
+                    \neg \forall x P(x) \implies M(x) &\equiv \exists x \neg (P(x) \implies M(x)), \text{ by De Morgan's Laws} \\
+                                                      &\equiv \exists x \neg (\neg P(x) \lor M(x)), \text{ by Conditional Identities} \\
+                                                      &\equiv \exists x \neg \neg P(x) \land \neg M(x), \text{ by De Morgan's Laws} \\
+                                                      &\equiv \exists x P(x) \land \neg M(x) \text{ by Double Negation}
+                \end{align*}
+
+                \medskip
+
+                Step 3:
+
+                There is a patient who was given the placebo and did not have a migraine.
+
+            \item[(e)] There is a patient who had migraines and was given the placebo.
+            
+                \answer
+
+                Step 1:
+
+                \( \exists x M(x) \land P(x) \)
+
+                \medskip
+
+                Step 2:
+                \begin{align*}
+                    \neg \exists x M(x) \land P(x) &\equiv \forall x \neg (M(x) \land P(x)) \\
+                                                   &\equiv \forall x \neg M(x) \lor \neg P(x)
+                \end{align*}
+
+                \medskip
+
+                Step 3:
+
+                Every patient did not have or did not receive a placebo.
+
+        \end{enumerate}
+
+    \item zyBooks Exercise 1.9.4, c-e
+    
+    Write the negation of each of the following logical expressions so that all negations immediately precede predicates. In some cases, it may be necessary to apply one or more laws of propositional logic.
+
+        \begin{enumerate}
+            
+            \item[(c)] \( \exists x \forall y (P(x, y) \implies Q(x, y)) \)
+            
+                \answer
+                \begin{align*}
+                    \neg \exists x \forall y (P(x, y) \implies Q(x, y)) &\equiv \forall x \exists y \neg (P(x, y) \implies Q(x,y)) \text{ by De Morgan's Laws}\\
+                        &\equiv \forall x \exists y \neg (\neg P(x, y) \lor Q(x, y)) \text{ by Conditional Identities} \\
+                        &\equiv \forall x \exists y \neg \neg P(x, y) \land \neg Q(x, y) \text{ by De Morgan's Laws} \\
+                        &\equiv \forall x \exists y P(x, y) \land \neg Q(x, y) \text{ by Double Negation}
+                \end{align*}
+
+            \item[(d)] \( \exists x \forall y (P(x, y) \iff P(y, x)) \) \\
+            
+                \answer
+                \begin{align*}
+                    \neg \exists x \forall y (P(x, y) \iff P(y, x)) &\equiv \forall x \exists y \neg (P(x, y) \iff P(y, x)) \text{ by De Morgan's Laws} \\
+                        &\equiv \forall x \exists y \neg ((P(x, y) \implies P(y, x)) \land (P(y, x) \implies P(x, y))) \\
+                        & \qquad \text{ by Conditional Identities} \\
+                        &\equiv \forall x \exists y \neg (P(x, y) \implies P(y, x)) \lor \neg (P(y, x) \implies P(x, y)) \\
+                        & \qquad \text{ by De Morgan's Laws} \\
+                        &\equiv \forall x \exists y \neg (\neg P(x, y) \lor P(y, x)) \lor \neg (\neg P(y, x) \lor P(x, y)) \\
+                        & \qquad \text{ by Conditional Identities} \\
+                        &\equiv \forall x \exists y (P(x, y) \land \neg P(y, x)) \lor (P(y, x) \land \neg P(x, y)) \\
+                        & \qquad \text{ by De Morgan's Laws}
+                \end{align*}
+
+            \item[(e)] \( \exists x \exists y P(x, y) \land \forall x \forall y Q(x, y) \)
+            
+                \answer
+                \begin{align*}
+                    \neg (\exists x \exists y P(x, y) \land \forall x \forall y Q(x, y)) &\equiv \neg \exists x \exists y P(x, y) \lor \neg \forall x \forall y Q(x, y) \\
+                        &\equiv \forall x \forall y \neg P(x, y) \lor \exists x \exists y \neg Q(x, y) 
+                \end{align*}
+
+        \end{enumerate}
+        
+\end{enumerate}
+
+\end{document}
