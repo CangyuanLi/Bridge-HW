@@ -10,7 +10,7 @@ int main()
     {
         for (int j = 1; j <= n; j++)
         {
-            std::cout << i * j << ' ';
+            std::cout << i * j << '\t';
             if (j == n)
             {
                 std::cout << '\n';
