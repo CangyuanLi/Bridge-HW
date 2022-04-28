@@ -1,6 +1,7 @@
 \documentclass[14pt]{extreport}
 \usepackage{amsmath}
 \usepackage{amssymb}
+\usepackage{float}
 \usepackage[a4paper, total={7in, 10in}]{geometry}
 \usepackage{graphicx}
 \usepackage[utf8]{inputenc}
@@ -128,7 +129,7 @@ Which of the following functions are from \( \mathbb{R} \) to \( \mathbb{R} \)? 
 
 \section*{Question 10:}
 
-\subsection*{I.}
+\subsection*{Part I.}
 
 \subsubsection*{Section A: zyBooks Exercise 4.2.2; c, g, k}
     
@@ -226,7 +227,7 @@ Indicate if the function is one-to-one, onto, neither, or both. If not one-to-on
         
 \end{enumerate}
 
-\subsection*{II.}
+\subsection*{Part II.}
 
 Give an example of a function from the set of integers to the set of positive integers ($\mathbb{Z} \rightarrow \mathbb{Z^{+}}$) that is: 
 
@@ -397,11 +398,20 @@ The domain and target set of functions f, g, and h are $\mathbb{Z}$. The functio
         \end{align*}
 
 \end{enumerate}
+\newpage
 
 \subsubsection*{Section D: zyBooks Exercise 4.4.6; c-e}
+
+Define the following functions \( f \), \( g \), and \( h \):
+
+\begin{itemize}
+    \item \( f: \{0, 1\}^3 \rightarrow \{0, 1\}^3 \). The output of \( f \) is obtained by taking the input string and replacing the first bit by 1, regardless of whether the first bit is a 0 or 1.
+    \item \( g: \{0, 1\}^3 \rightarrow \{0, 1\}^3 \). The output of \( g \) is obtained by taking the input string and reversing the bits.
+    \item \( h: \{0, 1\}^3 \rightarrow \{0, 1\}^3 \). The output of \( h \) is obtained by taking the input string \( x \), and replacing the last bit with a copy of the first bit.
+\end{itemize}
 	
 \begin{enumerate}
-    \item[(c)]
+    \item[(c)] What is \( (h \circ f)(010) \)?
     
         \answer
 
@@ -411,11 +421,12 @@ The domain and target set of functions f, g, and h are $\mathbb{Z}$. The functio
             = 111
         \end{align*}
 
-    \item[(d)]
+    \item[(d)] What is the range of \( h \circ f \)?
     
         \answer
 
-        \begin{table}[h]
+        \begin{table}[H]
+            \centering
             \hspace{20mm}
             \begin{tabular}{lll}
             Domain & f(x) & h(f(x)) \\ \hline
@@ -431,12 +442,14 @@ The domain and target set of functions f, g, and h are $\mathbb{Z}$. The functio
         \end{table}
 
         $\therefore$ Range of $h \circ f = \left \{ 101, 111 \right \}$
+        \newpage
 
-    \item[(e)]
+    \item[(e)] What is the range of \( g \circ f \)?
     
         \answer
     
-        \begin{table}[h]
+        \begin{table}[H]
+            \centering
             \hspace{20mm}
             \begin{tabular}{lll}
             Domain & f(x) & g(f(x)) \\ \hline
@@ -456,10 +469,12 @@ The domain and target set of functions f, g, and h are $\mathbb{Z}$. The functio
 \end{enumerate}
 	
 \subsubsection*{Section E: Extra Credit, zyBooks Exercise 4.4.4; c, d}
+
+Let \( f: X \rightarrow Y \) and \( g: Y \rightarrow X \) be two functions.
 	
 \begin{enumerate}
 
-    \item[(c)]
+    \item[(c)] Is it possible that \( f \) is not one-to-one and \( g \circ f \) is one-to-one? Justify your answer. If the answer is "yes", give a specific example for \( f \) and \( g \).
     
         \answer
 
@@ -476,8 +491,10 @@ The domain and target set of functions f, g, and h are $\mathbb{Z}$. The functio
         \end{align*}
         Hence, $f$ is one-to-one. \\\\
         i.e. If $g \circ f$ is one-to-one, we must have $f$ as one-to-one. $\blacksquare$ 
+
+    \newpage
         
-    \item[(d)]
+    \item[(d)] Is it possible that \( g \) is not one-to-one and \( g \circ f \) is one-to-one? Justify your answer. If the answer is "yes", give a specific example for \( f \) and \( g \).
     
         \answer
         
@@ -485,7 +502,6 @@ The domain and target set of functions f, g, and h are $\mathbb{Z}$. The functio
         \begin{figure}[htp]
             \centering
             \includegraphics[width=10cm]{VennDiagramQ11.png}
-            \label{fig:galaxy}
         \end{figure}
     
 \end{enumerate}
