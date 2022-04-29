@@ -8,6 +8,7 @@ int main()
     std::cout << "Enter a decimal number:\n";
     std::cin >> base_ten_number;
 
+    // this automatically orders the keys from 1 to 1000 (lowest to highest)
     std::map<int, char> roman_numeral_map = {
         {1000, 'M'},
         {500, 'D'},
@@ -18,6 +19,8 @@ int main()
         {1, 'I'}
     };
 
+    // we always want to apply the highest number first (otherwise we get a 1000 I's), so iterate
+    // through the map in reverse order, from highest to lowest
     int remainder = base_ten_number;
     std::string roman_result_string;
     for (auto iter = roman_numeral_map.rbegin(); iter != roman_numeral_map.rend(); iter++)
