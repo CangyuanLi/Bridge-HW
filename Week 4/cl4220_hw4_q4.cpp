@@ -22,7 +22,7 @@ int main()
         product *= num;
     }
 
-    geo_mean = std::pow(product, 1.0 / seq_len);
+    geo_mean = std::pow(product, 1.0 / seq_len); // use a float here as we don't want integer div
     std::cout << "The geometric mean is: " << geo_mean << '\n';
 
     // Section B (while loop)
