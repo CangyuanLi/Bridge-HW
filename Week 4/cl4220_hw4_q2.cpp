@@ -8,36 +8,52 @@ int main()
     std::cout << "Enter a decimal number:\n";
     std::cin >> base_ten_number;
 
-    // this automatically orders the keys from 1 to 1000 (lowest to highest)
-    std::map<int, char> roman_numeral_map = {
-        {1000, 'M'},
-        {500, 'D'},
-        {100, 'C'},
-        {50, 'L'},
-        {10, 'X'},
-        {5, 'V'},
-        {1, 'I'}
-    };
+    // we always want to apply the highest number first (otherwise we get a 1000 I's)
+    // so when we iterate go from 1000 (M) to 1 (I)
+    const int roman_numerals [7] = { 1000, 500, 100, 50, 10, 5, 1 };
 
-    // we always want to apply the highest number first (otherwise we get a 1000 I's), so iterate
-    // through the map in reverse order, from highest to lowest
+    std::cout << base_ten_number << " is ";
+
     int remainder = base_ten_number;
     std::string roman_result_string;
-    for (auto iter = roman_numeral_map.rbegin(); iter != roman_numeral_map.rend(); iter++)
+    for (int i = 0; i < 7; i++)
     {
-        int roman_numeral = iter -> first;
-        char roman_char = iter -> second;
+        // map each value to the corresponding roman numeral character
+        int roman_numeral = roman_numerals[i];
+        char roman_char;
+        switch (roman_numeral)
+        {
+            case 1000:
+                roman_char = 'M';
+                break;
+            case 500:
+                roman_char = 'D';
+                break;
+            case 100:
+                roman_char = 'C';
+                break;
+            case 50:
+                roman_char = 'L';
+                break;
+            case 10:
+                roman_char = 'X';
+                break;
+            case 5:
+                roman_char = 'V';
+                break;
+            case 1:
+                roman_char = 'I';
+                break;
+        }
         
         int num_numerals = remainder / roman_numeral;
         remainder = remainder % roman_numeral;
 
         for (int i = 0; i < num_numerals; i++)
         {
-            roman_result_string.push_back(roman_char);
+           std::cout << roman_char;
         }
     }
-
-    std::cout << base_ten_number << " is " << roman_result_string;
 
     return 0;
 }

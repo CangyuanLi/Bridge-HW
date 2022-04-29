@@ -11,6 +11,8 @@ int main()
     int max_stars = n * 2 - 1;
     int max_spaces = max_stars - 1;
 
+    // first print the top triangle
+    // here we 
     for (int i = 0; i < n; i++)
     {
         int spaces = start_spaces / 2;
