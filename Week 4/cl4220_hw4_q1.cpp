@@ -18,6 +18,8 @@ int main()
         count -= 1;
     }
 
+    std::cout << '\n';
+
     // Section B- for loop
     std::cout << "Section B\n";
 
