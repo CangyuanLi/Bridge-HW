@@ -11,6 +11,8 @@ int main()
         int num = i;
         int num_even_digits = 0;
         int num_odd_digits = 0;
+
+        // look at each digit in the number
         while (num > 0)
         {
             int temp = num % 10;
