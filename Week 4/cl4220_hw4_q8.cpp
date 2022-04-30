@@ -34,12 +34,18 @@ int main()
             if (guess < correct_num)
             {
                 std::cout << "Wrong! My number is bigger.\n";
-                min = guess + 1;
+                if (guess > min)
+                {
+                    min = guess + 1;
+                }
             }
             else if (guess > correct_num)
             {
                 std::cout << "Wrong! My number is smaller.\n";
-                max = guess - 1;
+                if (guess < max)
+                {
+                    max = guess - 1;
+                }
             }
         }
         else

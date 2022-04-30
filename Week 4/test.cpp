@@ -1,44 +1,50 @@
 #include <iostream>
-#include <cmath>
+#include <cstdlib>
+#include <ctime>
 
 using namespace std;
 
 int main()
 {
-	int n, RemValue;
-	int DecimalNum, Power = 0; 
-	
-	cout << "Enter decimal number: " << endl;
-	cin >> n;
-	
-	// Finding maximum power of 2 first
-	
-	DecimalNum = n; 
+	int n, random, RemGuess, lowrange = 1, highrange = 100;
 
-	while (DecimalNum > 1)
+	srand(time(0));
+	random = (rand() % 100) + 1;
+
+	cout << "I thought of a number between 1 and 100! Try to guess it." << endl;
+
+	for (RemGuess = 5; RemGuess >= 1; RemGuess--)
 	{
-		DecimalNum /= 2; 
-		Power++; 
+		cout << "Range: ["<<lowrange<<", "<<highrange<<"], Number of guesses left: " << RemGuess << endl;
+		cout << "Your guess: " << endl;
+		cin >> n;
+
+		if (n < 1)
+			cout << "Your number is invalid, please enter a number between 1 and 100.";
+		else
+			if (n == random)
+			{
+				cout << "Congrats! You guessed my number in " << 6 - RemGuess << " guess(es).";
+				break;
+			}
+			else if (random > n && RemGuess > 1)
+			{
+				lowrange = n; 
+				cout << "Wrong! My number is bigger." << endl;
+				cout << endl;
+			}
+			else if (random < n && RemGuess > 1)
+			{
+				highrange = n; 
+				cout << "Wrong! My number is smaller." << endl;
+				cout << endl;
+			}
 	}
-		
-	cout << "The binary representation of " << n << " is "; 
 
-	// Now using the power of 2 to determine how many loops we need to perform. 
+	if (n != random)
+		cout << "Out of guesses! My number is " << random << endl; 
 
-	while (Power >= 0)
-	{
-		RemValue = n - int(pow(2, Power));
-
-		if (RemValue >= 0)
-		{
-			n = RemValue; 
-			cout << "1";
-		}
-		else 
-			cout << "0"; 
-
-		Power--; 
-	}
+	cout << endl;
 
 	return 0;
 }
