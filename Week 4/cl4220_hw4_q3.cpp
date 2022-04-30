@@ -32,7 +32,6 @@ int main()
 		max_power += 1; 
 	}
 
-    // 
     std::cout << "The binary representation of " << base_ten_number << " is "; 
     int remainder = base_ten_number;
     int exponent = max_power; // temp variable so we don't change max_power while iterating over it
