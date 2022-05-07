@@ -1,0 +1,592 @@
+\documentclass[14pt]{extreport}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{enumitem}
+\usepackage[a4paper, total={7in, 10in}]{geometry}
+\usepackage{graphicx}
+\usepackage[utf8]{inputenc}
+\usepackage{minted}
+\usepackage{subfig}
+
+\newcommand{\homework}[9]{
+    \noindent
+    \begin{center}
+        \framebox{
+            \vbox{
+                \hbox to 6.50in { {\bf NYU Computer Science Bridge to Tandon Course} \hfill Spring 2022 }
+                \vspace{4mm}
+                \hbox to 6.50in { {\Large \hfill Homework 5  \hfill} }
+                \vspace{3mm}
+                \hbox to 6.50in { \underline{Name(s)} \hfill \hspace{17mm} \underline{NetID(s)} \hfill \hfill }
+                \vspace{2mm}
+                \hbox to 6.50in { {#2} \hfill \hspace{15mm}{#3} \hfill \hfill \hfill \hfill \hfill }
+                \hbox to 6.50in { {#4} \hfill \hspace{24mm}{#5}  \hfill \hfill \hfill }
+                \hbox to 6in { {#6} \hfill \hspace{35mm}{#7} \hfill \hfill \hfill }
+                \hbox to 6.50in { {#8} \hfill \hspace{31mm}{#9}  \hfill \hfill \hfill}
+            }
+        }
+    \end{center}
+    \vspace*{4mm}
+}
+
+\newcommand{\ddfrac}[2]{\frac{\displaystyle #1}{\displaystyle #2}}
+\newcommand{\eq}[0]{\llap{\( \Leftrightarrow \) \qquad}}
+\newcommand{\answer}[0]{\medskip \textbf{Answer:} \medskip}
+\newcommand{\union}[0]{\cup}
+\newcommand{\intersect}[0]{\cap}
+\newcommand{\sumn}[0]{\( \sum\limits_{i=1}^n \)}
+\newcommand{\limn}[0]{\( \lim_{n \to \infty} \)}
+\newcommand{\limt}[0]{\( \lim_{t \to \infty} \)}
+\newcommand{\R}[0]{\mathbb{R}}
+\newcommand{\Z}[0]{\mathbb{Z}}
+\newcommand{\Bigo}[0]{\mathcal{O}}
+
+\begin{document}
+
+\homework{1}{Rishie Nandhan Babu}{rb5291@nyu.edu}{Amulya Thota}{ast9920@nyu.edu}{Cangyuan Li}{cl4220@stern.nyu.edu}{Daniel Lim}{dl3009@nyu.edu}
+\newpage
+
+\section*{Question 7:}
+
+\subsubsection*{Section A: zyBooks Exercise 8.2.2; b}
+
+Give complete proofs for the growth rates of the polynomials below. You should provide specific values for \( c \) and \( n_0 \) and prove algebraically that the functions satisfy the definitions for \( O \) and \( \Omega \).
+
+\begin{enumerate}
+    
+    \item[(b)] \( f(n) = n^3 + 3n^2 + 4 \). Prove that \( f = \Theta(n^3) \)
+    
+        \answer
+
+        Step 1: Show that \( f = \mathcal{O}(g) \). We want to show that there are positive real numbers \( c \) and \( n_0 \) such that for any \( n \in \Z^{+} \) such that \( n \geq n_0 \), \( f(n) \leq c \cdot g(n) \). Let \( g(n) = n^3 \), \( n_0 = 1 \). Using that \( n^3 \geq n^2 \) for all \( n \geq 1 \), construct the inequality
+        \begin{align*}
+            & n^3 + 3n^2 + 4 \leq n^3 + 3n^3 + 4n^3 \\
+            &\eq n^3 + 3n^2 + 4 \leq 8n^3 \\
+            &\eq f(n) \leq 8 \cdot g(n)
+        \end{align*}
+
+        So using \( c = 8 \) and \( n_0 = 1 \) as witnesses, \( f = \mathcal{O}(n^3) \).
+
+        \medskip
+
+        Step 2: Show that \( f = \Omega(g) \). We want to show that there are positive real numbers \( c \) and \( n_0 \) such that for any \( n \in \Z^{+} \) such that for \( n \geq n_0 \), \( f(n) \geq c \cdot g(n) \). Since you are adding a constant \( 4 \), it is true for all values of \( n \in \Z{+} \) that \( f > n^3 \). But we can choose \( n_0 = 1 \) to align with our choice for Step 1.
+        \begin{align*}
+            & n^3 + 3n^2 + 4 \geq 1 \cdot n^3
+        \end{align*}
+
+        So using \( c = 1 \) and \( n_0 = 1 \) as witnesses, \( f = \Omega(n^3) \).
+
+        \medskip
+
+        Step 3: Since \( f = \mathcal{O}(g) \) and \( f = \Omega(g) \), \( f = \Theta(g) = \Theta(n^3) \).
+
+\end{enumerate}
+
+\subsubsection*{Section B:}
+
+Use the definition of \( \Theta \) to show that \( \sqrt{7n^2 + 2n - 8} = \Theta(n) \)
+        
+    \answer
+
+    Step 1: Let \( g(n) = n, n_0 = 1 \). Then \( n^2 \geq n \) for all \( n \geq 1 \), and the inside of the square root is always positive. Also, the larger the number in the square root, the greater the square root, so construct the inequality
+    \begin{align*}
+        & \sqrt{7n^2 + 2n - 8} \leq \sqrt{7n^2 + 2n^2 - 8n^2} \\
+        &\eq \sqrt{7n^2 + 2n - 8} \leq \sqrt{n^2} \\
+        &\eq \sqrt{7n^2 + 2n - 8} \leq n \\
+        &\eq \sqrt{7n^2 + 2n - 8} \leq 1 \cdot g(n)
+    \end{align*}
+
+    So using \( c = 1 \) and \( n_0 = 1 \) as witnesses, \( f = \Bigo(n) \)
+
+    \medskip
+
+    Step 2: The statement \( \sqrt{7n^2 + 2n - 8} \geq n \) is equivalent to \( 7n^2 + 2n - 8 \geq n^2 \). Then this \( f \) is a polynomial with negative coefficients with \( a_2 > 0 \), so choose
+    \begin{align*}
+        c &= a_k / 2 \\
+          &= a_2 / 2 \\
+          &= 7 / 2
+    \end{align*}
+
+    and 
+
+    \begin{align*}
+        n_0 &= max(1, \frac{2A}{a_k}) \\
+            &= max(1, \frac{2(|-8|)}{7}) \\
+            &= max(1, \frac{16}{7}) \\
+            &= 16 / 7
+    \end{align*}
+    (where \( A \) is the sum of the absolute values of the negative coefficients in \( f(n) \)). So using \( c = 7 / 2 \) and \( n_0 = 16 / 7 \) as witnesses, \( f = \Omega(n) \). So \( f = \Theta(n) \).
+
+\subsubsection*{Section C: zyBooks Exercise 8.3.5; a-e}
+
+A C++ implementation of the mystery algorithm would look something like the following, given a few simplifications (for example, assuming all inputs are integers). 
+
+\begin{minted}{cpp}
+    #include <iostream>
+    #include <vector>
+
+    std::vector<int> mystery_algorithm(std::vector<int> vec, int p)
+    {
+        auto n = vec.size();
+        int i = 1;
+        int j = n;
+
+        while (i < j)
+        {
+            while (i < j && vec[i-1] < p)
+            {
+                i += 1;
+            }
+            while (i < j && vec[j-1] >= p)
+            {
+                j -= 1;
+            }
+            
+            if (i < j)
+            {
+                std::swap(vec[i-1], vec[j-1]);
+            }
+        }
+        
+        return vec;
+    }
+\end{minted}
+
+\begin{enumerate}
+    
+    \item[(a)] Describe in English how the sequence of numbers is changed by the algorithm.
+    
+        \answer
+
+        The algorithm bisects the sequence of numbers into a group less than \( p \) (which will reside in the first half of the list), and a group greater than or equal to \( p \), which will reside in the second half of the list. Note that the only sorting it does is into the two buckets. For example, given an input \( [3, -1, 8, -4] \) and \( p = 0 \), the algorithm would return \( [-4, -1, 8, 3] \)
+
+    \item[(b)] What is the total number of times that the lines ``\( i := i + 1 \)'' or ``\( j := j + 1 \)'' are executed on a sequence of length \( n \)? Describe the inputs that maximize and minimize the number of times the two lines are executed, if applicable.
+    
+        \answer
+
+        The individual lines do depend on the values. \( i := i + 1 \) will be executed \( x \) times, where \( x \) is the number of values in the sequence \( < p \), and \( j := j - 1 \) will be executed \( y - 1 \) times, where \( y \) is the number of values in the sequence \( >= p \). Overall, the number of times \( i := i + 1 \) or \( j := j - 1 \) are executed only depend on the length of the sequence. They will always be executed \( n - 1 \) times.
+
+    \item[(c)] What is the total number of times that the swap operation is executed? Describe the inputs that maximize and minimize the number of times the swap is executed, if applicable.
+
+        \answer
+
+        It doesn't depend on the values of the numbers in the sense that an array of length \( n \) containing large numbers would take any more swaps than an array of length \( n \) containing small numbers, but it does depend on the distribution / placement of the numbers in the array. For example, a sorted array (min to max) would minimize the number of swaps to 1. On the other hand, a sorted array (max to min) would maximize the number of swaps, as every element \( >= p \) would need to be moved to the right half. More generally, a sequence with values \( < p \) are already packed together to the left and values \( \geq p \) packed together to the right is the best case, and a sequence with values \( \geq p \) packed together to the left and values \( > p \) packed together to the right is the worst case.
+
+    \item[(d)] Give an asymptotic lower bound for the time complexity of the algorithm. Is it important to consider the worst-case input in determining an asymptotic lower bound on the time complexity of the algorithm?
+    
+        \answer
+
+        It is important to consider the worst case because the worst case does not strictly depend on \( n \). It is possible that for some algorithm, the best case with size \( 2 \) is, for example, linear, and the worst case with size \( 2 \) is quadratic. So consider the worst case as mentioned in (c), where all numbers are in their incorrect bucket. Because the values are being swapped, the number of swaps is at most \( min(x, y - 1) \), where \( x, y \) are defined in (b). This makes sense because if one swap operation moves a number from the incorrect bucket to the correct bucket, any operations beyond the smallest incorrect bucket would undo a correction. Thefore, the number of swap operations is linear. More precisely, it is at most \( n / 2 \). In (b) we also established that the number of increments / decrements is also linear, \( n - 1 \). Therefore, let \( f(n) = \frac{n}{2} + n - 1 = \frac{3}{2}n - 1 \).
+
+        \medskip
+        
+        \( f \) is a polynomial with a negative coefficient and \( a_1 > 0 \). So let \( c = 3 \) and
+        \begin{align*}
+            n_0 &= max(1, \frac{2(|-1|)}{3/2}) \\
+                &= max(1, \frac{4}{3}) \\
+                &= 4 / 3
+        \end{align*}
+
+        So the asymptotic lower bound is \( \Omega(n) \).
+
+    \item[(e)] Give a matching upper bound for the time complexity of the algorithm.
+    
+        \answer
+
+        Let \( c = 3/2 \) and \( n_0 = 0 \).
+
+        \begin{align*}
+            & \frac{3}{2}n - 1 \leq \frac{3}{2}n \\
+            &\eq -1 \leq 0
+        \end{align*} 
+
+        So the asymptotic upper bound is \( \Bigo(n) \).
+
+\end{enumerate}
+\newpage
+
+\subsection*{Question 8:}
+
+\begin{enumerate}[label=(\alph*)]
+
+\item  Zybooks 5.1.2, sections b,c
+\newline
+
+b) Strings of length 7, 8, or 9. Characters can be special characters, digits, or letters.\\
+There are total 40 options for each character of the string.\\
+
+Length 7 or 8 or 9. We will calculate each and calculate the sum to give the final answer.\\
+
+Possibilities with length 7: \[40^{7} \]  \\
+
+Possibilities with length 8: \[40^{8} \] \\
+
+Possibilities with length 9: \[40^{9} \] \\
+
+Final answer = sum of above = \[40^{7} + 40^{8} + 40^{9} = 40^{7} (1+40+40^{2}) = 2.6886144 * 10^{14} \] possibilities\\
+
+
+c) Strings of length 7, 8, or 9. Characters can be special characters, digits, or letters. The first character cannot be a letter.\\
+So, the first character will only have 14 possibilities and other characters will have 40 possibilities.\\
+
+Possibilities with length 7: \[14 * 40^{6} \]  \\
+
+Possibilities with length 8: \[14 * 40^{7} \] \\
+
+Possibilities with length 9: \[14 * 40^{8} \] \\
+
+Final answer = sum of above = \[(14 * 40^{6}) + (14 * 40^{7}) + (14 * 40^{8}) = 14*(40^{6} + 40^{7} + 40^{8}) = 9.4101504 * 10^{13} \] possibilities\\
+
+
+\item Zybooks 5.3.2, section a
+\newline
+
+How many strings are there over the set {a, b, c} that have length 10 in which no two consecutive characters are the same? For example, the string "abcbcbabcb" would count and the strings "abbbcbabcb" and "aacbcbabcb" would not count.\\
+
+First character will have 3 options (characters a, b, or c).\\
+All other characters (remaining 9) will only have 2 possibilities to account for not using the same character consecutively. \\
+
+So the answer is $ (3 * 2^{9}) = 3 * 512 = 1536  $ possibilities\\
+
+\item Zybooks 5.3.3, sections b, c
+\newline
+License plate numbers in a certain state consists of seven characters. The first character is a digit (0 through 9). The next four characters are capital letters (A through Z) and the last two characters are digits. Therefore, a license plate number in this state can be any string of the form:\\
+
+Digit-Letter-Letter-Letter-Letter-Digit-Digit\\
+
+b) How many license plate numbers are possible if no digit appears more than once?\\
+
+First character is a digit. Possibilities = 10\\
+Second character is a capital letter. Possibilities = 26\\
+Third character is a capital letter. Possibilities = 26\\
+Fourth character is a capital letter. Possibilities = 26\\
+Fifth character is a capital letter. Possibilities = 26\\
+Sixth character is a digit. Possibilities = 9\\
+Seventh(last) character is a digit. Possibilities = 8\\
+
+Final answer is a product of the above:\\
+\[ 10 * 26 * 26 * 26 * 26 * 9 * 8 = 10 * 26^{4} * 9 * 8 = 329022720  \] possibilities
+\newline
+
+c) How many license plate numbers are possible if no digit or letter appears more than once?\\
+
+First character is a digit. Possibilities = 10\\
+Second character is a capital letter. Possibilities = 26\\
+Third character is a capital letter. Possibilities = 25\\
+Fourth character is a capital letter. Possibilities = 24\\
+Fifth character is a capital letter. Possibilities = 23\\
+Sixth character is a digit. Possibilities = 9\\
+Seventh(last) character is a digit. Possibilities = 8\\
+
+Final answer is a product of the above:\\
+\[ 10 * 26 * 25 * 24 * 23 * 9 * 8 = 258336000 \] possibilities
+\newline
+
+\item Zybooks 5.2.3, sections a, b
+\newline
+Let $B = {0, 1}$. $B^{n}$ is the set of binary strings with n bits. Define the set $E_{n}$ to be the set of binary strings with n bits that have an even number of 1's. Note that zero is an even number, so a string with zero 1's (i.e., a string that is all 0's) has an even number of 1's.\\
+
+a) Show a bijection between $B^{9}$ and $E_{10}$. Explain why your function is a bijection.\\
+
+$B^{9}$ will have $2^{9}$ elements\\
+$B^{10}$ includes all strings = total $2^{10}$ elements.\\
+$E_{10}$ includes only the strings with even number of 1s including zero 1s. Logically, this would include exactly half the number of elements in $B^{10}$ (as the other half would include odd number of 1s)\\
+
+Bijection between $B^{9}$ and $E_{10}$:\\
+They have the same cardinality = 512.\\
+
+Let us consider the function where: If the domain string has odd number of 1s, a 1 would be added to it at the end to map it to a string in the Target. If the domain string has even number of 1s already, a 0 would be added at the end. Each Domain string will map to exactly one string in the Target. Hence One-to-one \\
+This is also Onto. Each string in the Target will have a corresponding string in the Domain, which is basically obtained by deleting the last digit in the Target string. \\
+Since it is both one-to-one and onto, the above function is a Bijection. \\
+
+
+b) What is $|E_{10}|$ ?
+\newline
+
+As mentioned in the above, we can logically deduce that $E_{10}$ has exactly half the number of elements in $B^{10}$ (as the other half would include odd number of 1s). The cardinality of $B^{10}$ is $2^{10} = 1024$. Hence the cardinality of $E_{10} = 1024/2 = 512$
+\newline
+
+We can calculate this in another way also:\\
+$E_{10}$ includes strings with even number of 1s:\\
+Number of strings with zero 1s = 1\\
+Number of strings with two 1s = $10C2$ (choosing 2 places for the 1s among 10 available places) $= 45$\\
+Number of strings with four 1s = $10C4 = 210$\\
+Number of strings with six 1s = $10C6 = 210$\\
+Number of strings with eight 1s = $10C8 = 45$\\
+Number of strings with ten 1s = 1\\
+The total number, $|E_{10}|$ is a sum of the above:\\
+\[ 1 + 45 + 210 + 210 + 45 + 1 = 512\] \\
+
+\end{enumerate}
+\newpage
+
+\subsection*{Question 9:}
+\begin{enumerate}[label=(\alph*)]
+
+\item  Exercise	5.4.2,	sections	a,	b
+\newline
+
+a) Following representation demonstrates the different possibilities of filling in digits in each position of the 7-digit phone number.
+
+\begin{table}[h]
+\centering
+\begin{tabular}{lllllll}
+\hline
+\multicolumn{1}{|l|}{8} & \multicolumn{1}{l|}{2} & \multicolumn{1}{l|}{4-5} & \multicolumn{1}{l|}{0-9} & \multicolumn{1}{l|}{0-9} & \multicolumn{1}{l|}{0-9} & \multicolumn{1}{l|}{0-9} \\ \hline
+1                       & 1                      & 2                        & 10                       & 10                       & 10                       & 10                      
+\end{tabular}
+\end{table}
+
+$\therefore$ The number of possible phone numbers $= 2 \times 10^4.$ \\\\
+
+b) Following representation demonstrates the different possibilities of filling in digits in each position of the 7-digit phone number.
+
+\begin{table}[h]
+\centering
+\begin{tabular}{lllllll}
+\hline
+\multicolumn{1}{|l|}{8} & \multicolumn{1}{l|}{2} & \multicolumn{1}{l|}{4-5} & \multicolumn{1}{l|}{} & \multicolumn{1}{l|}{} & \multicolumn{1}{l|}{} & \multicolumn{1}{l|}{} \\ \hline
+1                       & 1                      & 2                        & 10                    & 9                     & 8                     & 7                    
+\end{tabular}
+\end{table}
+The last four digits of the phone number should all be different. Hence, the number of possibilities reduces by one for every other digit. \\\\
+$\therefore$ The number of possible phone numbers $= 2 \times 10 \times 9 \times 8 \times 7 = 10080. $
+
+\item  Exercise	5.5.3,	sections	a-g\\
+\newline
+How many 10-bit strings are there subject to each of the following restrictions? \\\\
+(a) No restrictions. \\\\
+Following representation demonstrates the different possibilities of filling in bits in each position of the 10-bit string.
+
+\begin{table}[h]
+\centering
+\begin{tabular}{llllllllll}
+\hline
+\multicolumn{1}{|l|}{0/1} & \multicolumn{1}{l|}{0/1} & \multicolumn{1}{l|}{0/1} & \multicolumn{1}{l|}{0/1} & \multicolumn{1}{l|}{0/1} & \multicolumn{1}{l|}{0/1} & \multicolumn{1}{l|}{0/1} & \multicolumn{1}{l|}{0/1} & \multicolumn{1}{l|}{0/1} & \multicolumn{1}{l|}{0/1} \\ \hline
+2                         & 2                        & 2                        & 2                        & 2                        & 2                        & 2                        & 2                        & 2                        & 2                       
+\end{tabular}
+\end{table}
+
+$\therefore$ The number of possible 10-bit strings $= 2^{10}.$ \\\\
+\newpage
+(b) The string starts with 001. \\\\
+Following representation demonstrates the different possibilities of filling in bits in each position of the 10-bit string.
+
+\begin{table}[ht]
+\centering
+\begin{tabular}{llllllllll}
+\hline
+\multicolumn{1}{|l|}{0} & \multicolumn{1}{l|}{0} & \multicolumn{1}{l|}{1} & \multicolumn{1}{l|}{0/1} & \multicolumn{1}{l|}{0/1} & \multicolumn{1}{l|}{0/1} & \multicolumn{1}{l|}{0/1} & \multicolumn{1}{l|}{0/1} & \multicolumn{1}{l|}{0/1} & \multicolumn{1}{l|}{0/1} \\ \hline
+1                       & 1                      & 1                      & 2                        & 2                        & 2                        & 2                        & 2                        & 2                        & 2                       
+\end{tabular}
+\end{table}
+
+$\therefore$ The number of possible 10-bit strings starting with 001 $= 2^{7}.$ \\\\
+
+(c) The string starts with 001 or 10. \\\\
+Following representation demonstrates the different possibilities of filling in bits in each position of the 10-bit string such that the string starts with 001.
+
+\begin{table}[ht]
+\centering
+\begin{tabular}{llllllllll}
+\hline
+\multicolumn{1}{|l|}{0} & \multicolumn{1}{l|}{0} & \multicolumn{1}{l|}{1} & \multicolumn{1}{l|}{0/1} & \multicolumn{1}{l|}{0/1} & \multicolumn{1}{l|}{0/1} & \multicolumn{1}{l|}{0/1} & \multicolumn{1}{l|}{0/1} & \multicolumn{1}{l|}{0/1} & \multicolumn{1}{l|}{0/1} \\ \hline
+1                       & 1                      & 1                      & 2                        & 2                        & 2                        & 2                        & 2                        & 2                        & 2                       
+\end{tabular}
+\end{table}
+
+$\Rightarrow$ The number of possible 10-bit strings starting with 001 $= 2^{7}.$ \\
+
+Following representation demonstrates the different possibilities of filling in bits in each position of the 10-bit string such that the string starts with 10.
+
+\begin{table}[ht]
+\centering
+\begin{tabular}{llllllllll}
+\hline
+\multicolumn{1}{|l|}{1} & \multicolumn{1}{l|}{0} & \multicolumn{1}{l|}{0/1} & \multicolumn{1}{l|}{0/1} & \multicolumn{1}{l|}{0/1} & \multicolumn{1}{l|}{0/1} & \multicolumn{1}{l|}{0/1} & \multicolumn{1}{l|}{0/1} & \multicolumn{1}{l|}{0/1} & \multicolumn{1}{l|}{0/1} \\ \hline
+1                       & 1                      & 2                        & 2                        & 2                        & 2                        & 2                        & 2                        & 2                        & 2                       
+\end{tabular}
+\end{table}
+
+$\Rightarrow$ The number of possible 10-bit strings starting with 10 $= 2^{8}.$ \\\\
+$\therefore$ The number of possible 10-bit strings starting with 001 or 10 $= 2^{7} + 2^{8}.$ \\\\
+
+(d) The first two bits are the same as the last two bits. \\\\
+Following representation demonstrates the different possibilities of filling in bits in each position of the 10-bit string such that the first two bits are same as the last two bits.\\\\
+Assume x and y are the values of the first two bits.\\\\
+
+\begin{table}[ht]
+\centering
+\begin{tabular}{llllllllll}
+x                         & y                        &                          &                          &                          &                          &                          &                          &                        &                        \\ \hline
+\multicolumn{1}{|l|}{0/1} & \multicolumn{1}{l|}{0/1} & \multicolumn{1}{l|}{0/1} & \multicolumn{1}{l|}{0/1} & \multicolumn{1}{l|}{0/1} & \multicolumn{1}{l|}{0/1} & \multicolumn{1}{l|}{0/1} & \multicolumn{1}{l|}{0/1} & \multicolumn{1}{l|}{x} & \multicolumn{1}{l|}{y} \\ \hline
+2                         & 2                        & 2                        & 2                        & 2                        & 2                        & 2                        & 2                        & 1                      & 1                     
+\end{tabular}
+\end{table}
+
+$\therefore$ The number of possible 10-bit strings such that the first two bits are the same as the last two bits $= 2^{8}.$ \\\\
+
+(e) The string has exactly six 0's. \\\\
+Since the string must have exactly six 0's, there are 10 choose 6 ways of selecting 6 positions of a 10-bit string to fill in the 0 bits.\\
+
+$\therefore$ The number of possible 10-bit strings with exactly six 0's $= \binom{10}{6}$ \\\\
+
+(f) The string has exactly six 0's and the first bit is 1. \\\\
+If the string has must have exactly six 0's, there are 10 choose 6 ways of selecting 6 positions of a 10-bit string to fill in the 0 bits. But, the first bit is always one. Hence, there are 9 choose 6 ways of selecting 6 positions to fill in the 0 bits. \\
+
+$\therefore$ The number of possible 10-bit strings with exactly six 0's and the first bit is one $= \binom{9}{6}$ \\\\
+
+(g) There is exactly one 1 in the first half and exactly three 1's in the second half. \\\\
+We can split the 10-bit string into 2 5-bits strings. In the first 5-bit string, there are 5 choose 1 ways of selecting a position in a 5-bits string to fill in bit 1. In the second 5-bit string, there are 5 choose 3 ways of selecting 3 positions in a 5-bit string to fill in 1 bits.\\
+
+$\therefore$ The number of possible 10-bit strings with exactly one 1 in the first half and exactly three 1's in the second half $= \binom{5}{1} \times \binom{5}{3}$ \\\\
+
+\newpage
+\item  Exercise	5.5.5,	section a
+\newline
+
+(a) There are 30 boys and 35 girls that try out for a chorus. The choir director will select 10 girls and 10 boys from the children trying out. How many ways are there for the choir director to make his selection?
+
+There are 30 choose 10 ways of selecting 10 boys from a group of 30 boys, and there are 35 choose 10 ways of selecting 10 girls from a group of 35 girls for the choir. 
+
+$\therefore$ The number of ways for the choir director to make his selection $= \binom{30}{10} \times \binom{35}{10}$ \\\\
+
+\item[(d)] Zybooks Ex 5.5.8, section c-f. This question refers to a standard deck of playing cards. A five-card hand is just a subset of 5 cards from a deck of 52 cards. 
+        
+\begin{enumerate}
+    
+    \item[(c)] How many five-card hands have four cards of the same rank? 
+    
+        \answer
+        
+        There are 26 heart and diamond cards out of 52, so the answer is: \\
+        $\therefore \binom{26}{5}$\\
+    
+    \item[(d)] How many five-card hands have four cards of the same rank? 
+    
+        \answer
+        
+        Of 52 card deck, there are 13 ranks (1-10, J, Q, K). Only 4 suits, so cannot have more than 4 with the same rank. Hence, there are only 13 possibilities to have 4 cards of same rank. The fifth card can be any other card besides the four cards with same rank (so there are 48 possibilities for the fifth card) \\
+        $\therefore 13 \times 48$\\
+    
+    \item[(e)] A "full house" is a five-card hand that has two cards of the same rank and three cards of the same rank. How many five-card hands contain a full house? 
+    
+        \answer
+        
+        First, we can pick any 1 of 13 ranks so $\rightarrow \binom{13}{1}$ \\
+        Then, for 2 of a kind, we can pick 2 of the same rank (of four suits) $\rightarrow \binom{4}{2}$ \\
+        Then, we pick any 1 of 12 remaining ranks $\rightarrow \binom{12}{1}$ \\
+        Finally, for the 3 of a kind, we pick 3 of 4 of the selected rank $\rightarrow \binom{4}{3}$\\
+        $\therefore 13 \times 12 \times \binom{4}{2} \times  \binom{4}{3}$\\
+    
+    \item[(f)] How many five-card hands do not have any two cards of the same rank? 
+    
+        \answer
+        
+        There are 13 ranks, we can pick 5 distinct ranks, so $\rightarrow \binom{13}{5}$ \\
+        For each rank, there are four suits, we pick 1 of the 4. We do this once for each card (so five times) $\rightarrow \binom{4}{1} \times 5$ \\
+        $\therefore \binom{13}{5} \times  4^{5}$\\
+
+\end{enumerate}
+
+\item[(e)] Zybooks Ex 5.6.6, section a-b. A country has two political parties, the Demonstrators and the Repudiators. Suppose that the national senate consists of 100 members, 44 of which are Demonstrators and 56 of which are Repudiators. 
+
+\begin{enumerate}
+    \item How many ways are there to select a committee of 10 senate members with the same number of D and R? 
+    
+        \answer
+        
+        We have 44 D's to select 5 members from and 56 R's to select 5 members from. Hence, the number of ways to select a committee of 10 with these constraints is:\\
+        $\therefore \binom{44}{5} \times \binom{56}{5}$\\
+    
+    \item Suppose that each party must select a speaker and a vice speaker. How many ways are there for the two speakers and two vice speakers to be selected?
+    
+        \answer
+        
+        From 56 R's and 44 D's, we need 1 speaker and 1 vice speaker from each. After each selection, the number of choices goes down to 55 and 43.\\
+        So $\Rightarrow \binom{56}{1} \times \binom{55}{1} \times \binom{44}{1} \times \binom{43}{1}$\\
+        $\therefore 56 \times 55 \times 44 \times 43$
+
+\end{enumerate}
+\newpage
+
+\subsection*{Question 10:}
+    
+    \item[(a)] zyBooks Ex 5.7.2, section a-b. A 5-card hand is drawn from a deck of standard playing cards.
+    
+        \begin{enumerate}
+            \item How many 5-card hands have at least one club?
+            
+                \answer
+
+                All possibilities for a 5-card hands drawn from a 52-card deck $\rightarrow \binom{52}{5}$\\
+                Clubs account for 13 cards, so without clubs, we have a selection of 39 cards $\rightarrow \binom{39}{5}$\\
+                $\therefore$ Number of hands with at least one club is total number of possible hands minus number of hands without clubs $\rightarrow \binom{52}{5} - \binom{39}{5}$\\
+                
+            \item How many 5-card hands have at least two cards with the same rank? 
+            
+                \answer
+
+                Complement of "two cards with the same rank" (which is a pair) is "no cards of the same rank" (which is NO PAIRS).\\
+                So from 13 ranks, we choose 5 distinct ranks $\rightarrow \binom{13}{5}$\\
+                Each rank has 4 different suits, and we do this 5 times for each card in the hand $\rightarrow \binom{4}{1} \times 5 = 4^{5}$\\
+                Deducting this complement from the total number of possibilities, we therefore have:\\
+                $\therefore \binom{52}{5} - \left( \binom{13}{5} \times 4^{5} \right)$\\
+            
+        \end{enumerate}
+    
+    \item[(b)] zyBooks Exercise 5.8.4, section a-b. 20 different comic books will be distributed to five kids.
+    
+        \begin{enumerate}
+            \item How many ways are there to distribute the comic books if there are no restrictions on how many go to each kid (other than the fact that all 20 will be given out)? 
+                
+                    \answer
+                    
+                    Each book can be given to any kid, which is 5 different ways per book. No other constraints, so simply there are 5 choices 20 times. \\
+                    $\therefore 5^{20}$ ways to distribute. \\
+                    
+            \item How many ways are there to distribute the comic books if they are divided evenly so that 4 go to each kid?
+                
+                    \answer
+                    
+                    Consider each kid as a "slot" with a precise capacity of 4, i.e. they have to receive 4 books. So we can apply the permutation with repetition formula. \\
+                    $\therefore \displaystyle \frac{20!}{4!4!4!4!}$  \\
+ 
+    \end{enumerate}
+            
+\end{enumerate}
+\newpage
+
+\section*{Question 11:}
+
+How many one-to-one functions are there from a set \( A \) with five elements to a set \( B \) with the following number of elements?
+
+\begin{enumerate}
+    
+    \item[(a)] 4
+    
+        \answer
+
+        Map an element of \( A \) to any of the four elements of \( B \). Then there are 3 choices of \( b \in B \) left, and so on, decrementing the number of choices by 1 every time an element is mapped from \( A \) to \( B \). So the answer is \( 4 \times 3 \times 2 \times 1 = 4! = 24 \).
+
+    \item[(b)] 5
+    
+        \answer
+
+        Similarly, \( 5! = 120 \).
+
+    \item[(c)] 6
+    
+        \answer
+
+        Here we cannot use the factorial function. But the same principle in \( A \) applies, just stop at the fifth element. So the answer is \( 6 \times 5 \times 4 \times 3 \times 2 = 720 \)
+
+    \item[(d)] 7
+    
+        \answer
+
+        \( 7 \times 6 \times 5 \times 4 \times 3 = 2520 \)
+
+\end{enumerate}
+
+\end{document}
