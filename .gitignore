@@ -5,6 +5,7 @@
 # folder ignores
 **/__pycache__
 **/venv
+**/_minted*
 
 **/.DS_Store
 **/.vscode
