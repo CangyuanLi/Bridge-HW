@@ -100,22 +100,26 @@ Use the definition of \( \Theta \) to show that \( \sqrt{7n^2 + 2n - 8} = \Theta
 
     \medskip
 
-    Step 2: The statement \( \sqrt{7n^2 + 2n - 8} \geq n \) is equivalent to \( 7n^2 + 2n - 8 \geq n^2 \). Then this \( f \) is a polynomial with negative coefficients with \( a_2 > 0 \), so choose
-    \begin{align*}
-        c &= a_k / 2 \\
-          &= a_2 / 2 \\
-          &= 7 / 2
-    \end{align*}
-
-    and 
+    Step 2: The statement \( \sqrt{7n^2 + 2n - 8} \geq c \cdot n \) is equivalent to \( 7n^2 + 2n - 8 \geq c^2 \cdot n^2 \). We can again use \( c = 1 \) and \( n_0 = 1 \), since \( 7n^2 + 2n \geq 9 \) for \( n \geq 1 \).
 
     \begin{align*}
-        n_0 &= max(1, \frac{2A}{a_k}) \\
-            &= max(1, \frac{2(|-8|)}{7}) \\
-            &= max(1, \frac{16}{7}) \\
-            &= 16 / 7
+        & \sqrt{7n^2 + 2n - 8} \geq c \cdot n \\
+        &\eq 7n^2 + 2n - 8 \geq c^2 n^2 \\
+        &\eq 7n^2 + 2n - 8 \geq 1 n^2 \\
+        &\eq 6n^2 + 2n - 8 \geq 0 \\
+        &\eq (2n - 2)(3n + 4) \geq 0
     \end{align*}
-    (where \( A \) is the sum of the absolute values of the negative coefficients in \( f(n) \)). So using \( c = 7 / 2 \) and \( n_0 = 16 / 7 \) as witnesses, \( f = \Omega(n) \). So \( f = \Theta(n) \).
+
+    Since we chose \( n_0 \geq 1 \), neither term can be negative, and we can see that
+    \begin{align*}
+        & (2n - 2)(3n + 4) \geq 0 \\
+        &\eq 2n - 2 \geq 0 \\
+        &\eq n \geq 1
+    \end{align*}
+
+    will indeed work.
+    
+    So using \( c = 1 \) and \( n_0 = 1 \) as witnesses, \( f = \Omega(n) \). So \( f = \Theta(n) \).
 
 \subsubsection*{Section C: zyBooks Exercise 8.3.5; a-e}
 
@@ -160,7 +164,7 @@ A C++ implementation of the mystery algorithm would look something like the foll
 
         The algorithm bisects the sequence of numbers into a group less than \( p \) (which will reside in the first half of the list), and a group greater than or equal to \( p \), which will reside in the second half of the list. Note that the only sorting it does is into the two buckets. For example, given an input \( [3, -1, 8, -4] \) and \( p = 0 \), the algorithm would return \( [-4, -1, 8, 3] \)
 
-    \item[(b)] What is the total number of times that the lines ``\( i := i + 1 \)'' or ``\( j := j + 1 \)'' are executed on a sequence of length \( n \)? Describe the inputs that maximize and minimize the number of times the two lines are executed, if applicable.
+    \item[(b)] What is the total number of times that the lines ``\( i := i + 1 \)'' or ``\( j := j - 1 \)'' are executed on a sequence of length \( n \)? Describe the inputs that maximize and minimize the number of times the two lines are executed, if applicable.
     
         \answer
 
@@ -180,23 +184,25 @@ A C++ implementation of the mystery algorithm would look something like the foll
 
         \medskip
         
-        \( f \) is a polynomial with a negative coefficient and \( a_1 > 0 \). So let \( c = 3 \) and
+        Let \( c = 1 \). Then,
         \begin{align*}
-            n_0 &= max(1, \frac{2(|-1|)}{3/2}) \\
-                &= max(1, \frac{4}{3}) \\
-                &= 4 / 3
+            & \frac{3}{2}n - 1 \geq c \cdot n \\
+            &\eq \frac{3}{2}n - 1 \geq n \\
+            &\eq \frac{1}{2}n \geq 1 \\
+            &\eq n \geq 2
         \end{align*}
 
-        So the asymptotic lower bound is \( \Omega(n) \).
+        So choose \( n_0 = 2 \) and \( c = 1 \). So the asymptotic lower bound is \( \Omega(n) \).
 
     \item[(e)] Give a matching upper bound for the time complexity of the algorithm.
     
         \answer
 
-        Let \( c = 3/2 \) and \( n_0 = 0 \).
+        Let \( c = 3/2 \) and \( n_0 = 1 \).
 
         \begin{align*}
             & \frac{3}{2}n - 1 \leq \frac{3}{2}n \\
+            &\eq \frac{3}{2} -1 \leq \frac{3}{2} \\
             &\eq -1 \leq 0
         \end{align*} 
 
