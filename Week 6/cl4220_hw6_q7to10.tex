@@ -424,7 +424,7 @@ A hand of 5 cards is dealt from a perfectly shuffled deck of playing cards. Let 
     
         \answer
 
-        It is possible to get 0 heads, 1 head, 2 heads, or 3 heads. Then the possible values of \( Y \) are \( \left\{ 0, 2, 4, 9 \right\} \). The the chance of getting \( Y = 4 \) is the same as the chance of getting 2 heads, and so on (a one-to-one mapping from \# of heads to \( Y \)). The probability of getting \( k \) successes in \( n \) trials follows a binomial distribution, but since that is in zyBooks section 6.8, here we list out the possible combinations.
+        It is possible to get 0 heads, 1 head, 2 heads, or 3 heads. Then the possible values of \( Y \) are \( \left\{ 0, 1, 4, 9 \right\} \). The the chance of getting \( Y = 4 \) is the same as the chance of getting 2 heads, and so on (a one-to-one mapping from \# of heads to \( Y \)). The probability of getting \( k \) successes in \( n \) trials follows a binomial distribution, but since that is in zyBooks section 6.8, here we list out the possible combinations.
         \[
             \left\{ HHH \right\},
             \left\{ HHT \right\},
@@ -437,8 +437,8 @@ A hand of 5 cards is dealt from a perfectly shuffled deck of playing cards. Let 
         \]
         So then the probability is just the number of occurences divided by 8.
         \begin{align*}
-            \E[Y] &= 0(p) + 1 \frac{3}{8} + 2 \frac{3}{8} + 3 \frac{1}{8} \\
-                  &= 1.5
+            \E[Y] &= 0(p) + 1 \frac{3}{8} + 4 \frac{3}{8} + 9 \frac{1}{8} \\
+                  &= 3
         \end{align*}
 
 \end{enumerate}
