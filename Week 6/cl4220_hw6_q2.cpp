@@ -7,7 +7,7 @@ bool is_palindrome(std::string str)
     bool palindrome = true;
     for (int i = 0; i < length; i++)
     {
-        if (str[i] != str[length - i - 1])
+        if (str[i] != str[length - i - 1]) // gets opposite index
         {
             palindrome = false;
             break;
