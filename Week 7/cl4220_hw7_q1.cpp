@@ -16,11 +16,13 @@ bool is_in_array(char target, char arr [], int arr_len)
 
 char str_to_lower(char c)
 {
+    // A is 65, a is 97. B is 66, b is 98. So the offset from upper to lower is always + 32
+    const int OFFSET_FROM_LOWERCASE = 32;
     char lowercase_char = c;
 
-    if (c >= 'A' && c <= 'Z')
+    if (c >= 'A' && c <= 'Z') // exploit that A to Z are contiguous in ASCII table
     {
-        lowercase_char = char(c + 32);
+        lowercase_char = char(c + OFFSET_FROM_LOWERCASE);
     }
     
     return lowercase_char;
