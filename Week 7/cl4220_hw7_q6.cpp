@@ -1,6 +1,7 @@
 #include <iostream>
 #include <vector>
 
+// taken from the lecture
 void resize_array(int *&arr, int current_size, int new_size)
 {
     int *temp = new int [new_size];
@@ -32,7 +33,7 @@ void main1()
         arr[idx] = input;
         idx += 1;
         
-        if (idx == size)
+        if (idx == size) // when we hit the limit, increase the size
         {
             resize_array(arr, size, idx + 1);
         }
