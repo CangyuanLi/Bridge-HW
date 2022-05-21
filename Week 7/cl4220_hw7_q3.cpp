@@ -2,6 +2,7 @@
 
 void odds_keep_evens_flip(int arr [], int arr_size)
 {
+    // create two arrays, one to hold the evens and one to hold the odds
     int odds_arr [arr_size];
     int evens_arr [arr_size];
 
@@ -21,6 +22,8 @@ void odds_keep_evens_flip(int arr [], int arr_size)
         }
     }
     
+    // since the odds come first, just copy the array (ignoring the junk values)
+    // into the master array
     for (int i = 0; i < odds_index; i++)
     {
         arr[i] = odds_arr[i];
@@ -28,6 +31,8 @@ void odds_keep_evens_flip(int arr [], int arr_size)
     
     std::cout << '\n';
 
+    // since the evens are in the back half, we need to start at the end of the odds
+    // and we iterate through the evens in reverse order to "flip" them
     for (int i = evens_index - 1; i >= 0; i--)
     {
         arr[odds_index] = evens_arr[i];
