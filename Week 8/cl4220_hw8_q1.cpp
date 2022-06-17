@@ -51,7 +51,7 @@ void print_ruler(int n)
 {
     if (n == 1)
     {
-        std::cout << '-';
+        std::cout << '-' << '\n';
     }
     else
     {
