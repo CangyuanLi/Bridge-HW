@@ -31,19 +31,14 @@ template <class T>
 class LList
 {
     LListNode<T> *head;
-    LListNode<T> *recursive_copy(LListNode<T> *rhs);
 
     public:
         LList() : head(nullptr) {};
         LList(const LList &rhs) : head(nullptr) { *this = rhs; };
         ~LList() { clear(); };
-        void insert_at_head(T newdata);
-        T remove_from_head();
-        bool is_empty() const { return head == nullptr; };
         void clear();
         void insert_at_end(T newdata);
         LListNode<T>* get_head() const { return this -> head; };
-        void insert_at_point(LListNode<T> *ptr, T newdata);
         int get_size();
         LListNode<T>* get_node_at_index(int index);
         void swap_nodes(LListNode<T> *first, LListNode<T> *second);
@@ -93,15 +88,6 @@ LListNode<T>* LList<T>::get_node_at_index(int index)
 }
 
 template <class T>
-void LList<T>::insert_at_head(T newdata) 
-{
-    LListNode<T> *new_node = new LListNode<T>();
-    new_node -> LListNode::data = newdata;
-    new_node -> LListNode::next = LList::head;
-    LList::head = new_node;
-}
-
-template <class T>
 void LList<T>::insert_at_end(T newdata)
 {
     LListNode<T> *new_node = new LListNode<T>(newdata);  // allocate a new node
@@ -122,17 +108,6 @@ void LList<T>::insert_at_end(T newdata)
 
         temp -> LListNode::next = new_node;
     }    
-}
-
-template <class T>
-LListNode<T> *LList<T>::recursive_copy(LListNode<T> *rhs)
-{
-    if (rhs == nullptr)
-    {
-        return nullptr;
-    }
-    
-    return new LListNode<T>(rhs -> LListNode::data, recursive_copy(rhs -> LListNode::next));
 }
 
 template <class T>
