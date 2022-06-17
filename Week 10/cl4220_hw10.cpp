@@ -11,6 +11,15 @@ class LList;
 
 class Employee;
 
+void strip_endline_chars(std::string &str);
+void open_file(std::ifstream &infile);
+LList<Employee> read_employee_file();
+LList<Employee> read_hour_file();
+void add_hour_data_to_emp(LList<Employee> *emp_llist, LList<Employee> *hour_llist);
+int find_index_of_max(LList<Employee> *llist, int low, int high);
+void sort_by_payroll(LList<Employee> *merged_llist);
+void print_final_output(LList<Employee> *final_llist);
+
 /*--------------------------------- Linked List Node Class ---------------------------------*/
 
 template <class T>
@@ -134,7 +143,7 @@ class Employee
 
     public:
         // constructors
-        Employee();
+        Employee() : id(0), hours_worked(0), hourly_pay(0), total_pay(0), name("") {};
         Employee(int emp_id, std::string emp_name, float emp_hourly_pay);
         Employee(int emp_id, int hours_worked);
 
@@ -164,7 +173,8 @@ Employee::Employee(int emp_id, int hours_worked)
 
 /*--------------------------------- Other Functions ---------------------------------*/
 
-void strip_endline_chars(std::string &str) {
+void strip_endline_chars(std::string &str)
+{
     char endline_chars[2] = { '\r', '\n' };
 
     for (int i = 0; i < 2; i++) 
@@ -178,6 +188,7 @@ void open_file(std::ifstream &infile)
 	std::string filepath;
 	std::cout << "Enter filepath: ";
 	std::cin >> filepath;
+    std::cin.clear();
 	infile.open(filepath);
 
 	while (!infile) 
@@ -192,6 +203,7 @@ void open_file(std::ifstream &infile)
 
 LList<Employee> read_employee_file()
 {
+    std::cout << "Enter employee file name." << std::endl;
     std::ifstream emp_file;
     open_file(emp_file);
 
@@ -218,6 +230,7 @@ LList<Employee> read_employee_file()
 
 LList<Employee> read_hour_file()
 {
+    std::cout << "Enter hour file name." << std::endl;
     std::ifstream hour_file;
     open_file(hour_file);
 
@@ -226,7 +239,7 @@ LList<Employee> read_hour_file()
     while (hour_file >> emp_id)
     {
         int hours_worked;
-        hour_file >> hours_worked;   
+        hour_file >> hours_worked;
         
         Employee emp(emp_id, hours_worked);
         hour_file_llist.insert_at_end(emp);
@@ -288,14 +301,7 @@ void sort_by_payroll(LList<Employee> *merged_llist)
     }
 }
 
-void test_swap(LList<Employee> *emp_file_llist)
-{
-    LListNode<Employee>* i_ptr = emp_file_llist -> get_node_at_index(0);
-    LListNode<Employee>* max_ind_ptr = emp_file_llist -> get_node_at_index(1);
-    emp_file_llist -> swap_nodes(i_ptr, max_ind_ptr);
-}
-
-void print_final_output(LList<Employee> *final_llist) 
+void print_final_output(LList<Employee> *final_llist)
 {
     LListNode<Employee> *head = final_llist -> get_head();
 	std::cout << "\n********Payroll Information********\n";
@@ -314,10 +320,12 @@ void print_final_output(LList<Employee> *final_llist)
 int main()
 {
     LList<Employee> emp_file_llist = read_employee_file();
+
+    std::cout << '\n';
+
     LList<Employee> hour_file_llist = read_hour_file();
-    add_hour_data_to_emp(&emp_file_llist, &hour_file_llist);
-    print_final_output(&emp_file_llist);
     
+    add_hour_data_to_emp(&emp_file_llist, &hour_file_llist);
     sort_by_payroll(&emp_file_llist);
 
     print_final_output(&emp_file_llist);
